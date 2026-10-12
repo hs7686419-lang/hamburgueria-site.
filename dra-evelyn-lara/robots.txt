@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Quando o domínio definitivo estiver no ar, gere o sitemap e descomente:
+# Sitemap: https://www.SEU-DOMINIO.com.br/sitemap.xml
