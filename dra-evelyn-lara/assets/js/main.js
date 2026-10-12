@@ -230,7 +230,7 @@
     });
     // qualificação antes das áreas de atuação (exigência do Código de Ética Odontológica)
     var qual = $('[data-treatments-qualification]');
-    qual.textContent = [prof.nome, prof.titulo, qualificacao, croText].filter(Boolean).join(' · ');
+    qual.textContent = [prof.nome, prof.titulo, qualificacao, croText].filter(Boolean).map(function (x) { return x.replace(/ /g, NB); }).join(' · ');
     qual.hidden = !treatments.length;
     $('[data-treatments-empty]').hidden = treatments.length > 0;
     $('[data-demo-note]').hidden = !(isDraft && treatments.some(function (t) { return t.demo; }));
@@ -256,7 +256,7 @@
     var cro = $('[data-cro]');
     cro.textContent = croText;
     cro.hidden = !croText;
-    $$('[data-qualificacao]').forEach(function (n) { n.textContent = qualificacao ? ' · ' + qualificacao : ''; });
+    $$('[data-qualificacao]').forEach(function (n) { n.textContent = qualificacao ? ' · ' + qualificacao.replace(/ /g, NB) : ''; });
 
     var espEl = clear($('[data-specialty]'));
     espEl.hidden = true;
