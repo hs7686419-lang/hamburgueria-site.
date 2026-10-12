@@ -51,8 +51,14 @@
     ? [endereco.logradouro, endereco.bairro, [endereco.cidade, endereco.uf].filter(Boolean).join(' - '), endereco.cep ? 'CEP ' + endereco.cep : '']
         .filter(Boolean).join(', ')
     : '';
-  var mapsLink = hasAddress ? (endereco.linkMaps || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addressText)) : '';
+  var mapsQuery = addressText + ', Brasil';
+  var mapsLink = hasAddress ? (endereco.linkMaps || 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(mapsQuery)) : '';
   var croText = prof.cro && prof.croUf ? 'CRO-' + prof.croUf + ' ' + prof.cro : '';
+  var horarios = cfg.horarios || [];
+  var hoursText = horarios.map(function (x) { return x.dias + ', ' + x.horas; }).join('; ');
+  var convenios = cfg.convenios || [];
+  var igUser = contato.instagram ? contato.instagram.replace(/\/+$/, '').split('/').pop() : '';
+  function listPt(items) { return items.length > 1 ? items.slice(0, -1).join(', ') + ' e ' + items[items.length - 1] : items.join(''); }
   var visibleTreatments = (cfg.tratamentos || []).filter(function (t) { return isDraft || !t.demo; });
 
   function pendingSpan(text) { return h('span', { class: 'pending', text: text || 'A confirmar' }); }
@@ -110,28 +116,60 @@
     sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7Z"/>',
     smile: '<circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/>',
     stethoscope: '<path d="M5 3v6a5 5 0 0 0 10 0V3"/><path d="M10 14v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="12" r="2"/>',
+    shield: '<path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/>',
+    canal: '<path d="M7 3c-2.5 0-4 2-4 4.5 0 2 .8 3.4 1.4 5 .6 1.8.8 4 1.4 6.2.4 1.5 1 2.3 1.8 2.3 1.2 0 1.4-1.7 1.8-3.6.3-1.4.7-2.9 2.6-2.9s2.3 1.5 2.6 2.9c.4 1.9.6 3.6 1.8 3.6.8 0 1.4-.8 1.8-2.3.6-2.2.8-4.4 1.4-6.2.6-1.6 1.4-3 1.4-5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3Z"/><path d="M10 9.5v5M14 9.5v5"/>',
+    bridge: '<path d="M3 7.5C3 6.1 4.1 5 5.5 5h13C19.9 5 21 6.1 21 7.5V10c0 1.2-.8 2-1.8 2L18 19h-2l-1-5h-1.5l-1 5h-1l-1-5H9l-1 5H6l-1.2-7C3.8 12 3 11.2 3 10Z"/>',
+    implant: '<path d="M7 3h10l-1.5 5h-7Z"/><path d="M12 8v13"/><path d="M9 11h6M9.5 14h5M10 17h4"/>',
+    braces: '<rect x="3" y="8" width="18" height="8" rx="4"/><path d="M3 12h18M8 10v4M12 10v4M16 10v4"/>',
+    face: '<path d="M12 3c-4 0-7 3-7 7.5C5 16 8.5 21 12 21s7-5 7-10.5C19 6 16 3 12 3Z"/><path d="M9.5 15.5s1 1 2.5 1 2.5-1 2.5-1M9 10.5h.01M15 10.5h.01"/>',
   };
   function icon(name) {
     var span = h('span', { class: 'treatment__icon', 'aria-hidden': 'true' });
     span.innerHTML = '<svg viewBox="0 0 24 24">' + (ICONS[name] || ICONS.tooth) + '</svg>';
     return span;
   }
-  var treatmentList = $('[data-treatments]');
-  visibleTreatments.forEach(function (t) {
+  var treatmentWrap = $('[data-treatments]');
+  function treatmentItem(t, headingTag) {
     var titleId = 'trat-' + t.id;
-    var title = h('h3', { class: 'treatment__title', id: titleId }, [icon(t.icone), t.nome, t.demo ? h('span', { class: 'badge', text: 'Exemplo' }) : null]);
+    var title = h(headingTag, { class: 'treatment__title', id: titleId }, [icon(t.icone), t.nome, t.demo ? h('span', { class: 'badge', text: 'Exemplo' }) : null]);
     var more = t.detalhe ? h('details', { class: 'treatment__more' }, [
       h('summary', {}, ['Saber mais', h('span', { class: 'sr-only', text: ' sobre ' + t.nome })]),
       h('p', { class: 'treatment__detail', text: t.detalhe }),
     ]) : null;
     var cta = h('a', { class: 'link-arrow', href: '#agendamento', 'data-service': t.id }, ['Consultar disponibilidade', h('span', { class: 'sr-only', text: ' para ' + t.nome }), h('span', { 'aria-hidden': 'true', text: ' →' })]);
-    treatmentList.appendChild(h('li', { class: 'treatment', 'data-reveal': '' }, [
+    return h('li', { class: 'treatment', 'data-reveal': '' }, [
       h('div', { class: 'treatment__head' }, [
         h('span', { class: 'treatment__num', 'aria-hidden': 'true' }),
         title,
         h('div', { class: 'treatment__body' }, [h('p', { class: 'treatment__summary', text: t.resumo }), more, h('div', { class: 'treatment__actions' }, [cta])]),
       ]),
+    ]);
+  }
+  // agrupa por categoria, na ordem de aparição no config; sem categorias, vira uma lista única
+  var groups = [];
+  visibleTreatments.forEach(function (t) {
+    var name = t.categoria || '';
+    var g = groups.filter(function (x) { return x.name === name; })[0];
+    if (!g) { g = { name: name, items: [] }; groups.push(g); }
+    g.items.push(t);
+  });
+  var useGroups = groups.length > 1 || (groups[0] && groups[0].name);
+  if (useGroups && groups.length > 1) {
+    treatmentWrap.appendChild(h('nav', { class: 'treatments__nav', 'aria-label': 'Categorias de tratamento' }, [
+      h('ul', {}, groups.map(function (g, i) { return h('li', {}, [h('a', { href: '#trat-cat-' + (i + 1), text: g.name })]); })),
     ]));
+  }
+  groups.forEach(function (g, i) {
+    var listEl = h('ol', { class: 'treatments__list' }, g.items.map(function (t) { return treatmentItem(t, useGroups ? 'h4' : 'h3'); }));
+    if (useGroups) {
+      var headId = 'trat-cat-' + (i + 1);
+      treatmentWrap.appendChild(h('section', { class: 'treatment-group', 'aria-labelledby': headId + '-t', id: headId }, [
+        h('h3', { class: 'treatment-group__title', id: headId + '-t', text: g.name }),
+        listEl,
+      ]));
+    } else {
+      treatmentWrap.appendChild(listEl);
+    }
   });
   if (!visibleTreatments.length) $('[data-treatments-empty]').hidden = false;
   if (isDraft && visibleTreatments.some(function (t) { return t.demo; })) $('[data-demo-note]').hidden = false;
@@ -251,9 +289,18 @@
   if (isDraft) $('.faq__intro').appendChild(h('p', { class: 'draft-note', html: '<strong>Respostas em rascunho.</strong> Revise cada resposta com a profissional antes de publicar (<code>faq</code> no <code>config.js</code>).' }));
   (cfg.faq || []).forEach(function (item, i) {
     var answer = h('div', { class: 'faq-item__answer' });
-    if (item.resposta.indexOf('{endereco}') !== -1) {
+    if (item.resposta.indexOf('{convenios}') !== -1) {
+      if (convenios.length) {
+        answer.appendChild(h('p', { text: 'São atendidos os convênios ' + listPt(convenios) + '. Ao agendar, informe o seu plano para confirmar a cobertura do atendimento.' }));
+      } else if (isDraft) {
+        answer.appendChild(h('p', {}, [h('span', { class: 'badge', text: 'Pendente' }), 'Informe os convênios em config.js.']));
+      } else {
+        return;
+      }
+    } else if (item.resposta.indexOf('{endereco}') !== -1) {
       if (hasAddress) {
-        answer.appendChild(h('p', {}, ['O consultório fica em ' + addressText + '. ', h('a', { href: mapsLink, target: '_blank', rel: 'noopener', text: 'Ver no Google Maps' })]));
+        answer.appendChild(h('p', {}, ['O consultório fica na ' + addressText + '. ', h('a', { href: mapsLink, target: '_blank', rel: 'noopener', text: 'Ver no Google Maps' })]));
+        if (hoursText) answer.appendChild(h('p', { text: 'Horário de atendimento: ' + hoursText + '.' }));
       } else if (isDraft) {
         answer.appendChild(h('p', {}, [h('span', { class: 'badge', text: 'Pendente' }), 'O endereço será exibido aqui assim que for validado em config.js.']));
       } else {
@@ -278,11 +325,12 @@
   else if (isDraft) row('E-mail', pendingSpan());
   if (hasAddress) row('Endereço', document.createTextNode(addressText));
   else if (isDraft) row('Endereço', pendingSpan('Endereço a validar'));
-  if ((cfg.horarios || []).length) {
-    var hoursList = h('ul', {}, cfg.horarios.map(function (x) { return h('li', { text: x.dias + ': ' + x.horas }); }));
+  if (horarios.length) {
+    var hoursList = h('ul', {}, horarios.map(function (x) { return h('li', { text: x.dias + ', ' + x.horas }); }));
     row('Horários', hoursList);
   } else if (isDraft) row('Horários', pendingSpan('Horários a confirmar'));
-  if (contato.instagram) row('Instagram', h('a', { href: contato.instagram, target: '_blank', rel: 'noopener', text: '@' + contato.instagram.replace(/\/+$/, '').split('/').pop() }));
+  if (convenios.length) row('Convênios', document.createTextNode(convenios.join(' · ')));
+  if (contato.instagram) row('Instagram', h('a', { href: contato.instagram, target: '_blank', rel: 'noopener', text: '@' + igUser }));
   if (!list.children.length) list.hidden = true;
 
   var mapBox = $('[data-map]');
@@ -295,7 +343,7 @@
     $('[data-map-placeholder]').appendChild(loadBtn);
     loadBtn.addEventListener('click', function () {
       mapBox.innerHTML = '';
-      mapBox.appendChild(h('iframe', { src: 'https://www.google.com/maps?q=' + encodeURIComponent(addressText) + '&output=embed', title: 'Mapa com a localização do consultório', loading: 'lazy', referrerpolicy: 'no-referrer-when-downgrade' }));
+      mapBox.appendChild(h('iframe', { src: 'https://www.google.com/maps?q=' + encodeURIComponent(mapsQuery) + '&output=embed', title: 'Mapa com a localização do consultório', loading: 'lazy', referrerpolicy: 'no-referrer-when-downgrade' }));
     });
   } else if (!isDraft) {
     mapBox.hidden = true;
@@ -306,7 +354,8 @@
   if (contato.telefone) fc.appendChild(h('li', {}, [h('a', { href: 'tel:+55' + digits(contato.telefone), text: contato.telefone })]));
   if (contato.email) fc.appendChild(h('li', {}, [h('a', { href: 'mailto:' + contato.email, text: contato.email })]));
   if (hasAddress) fc.appendChild(h('li', {}, [h('a', { href: mapsLink, target: '_blank', rel: 'noopener', text: addressText })]));
-  if (contato.instagram) fc.appendChild(h('li', {}, [h('a', { href: contato.instagram, target: '_blank', rel: 'noopener', text: 'Instagram' })]));
+  if (hoursText) fc.appendChild(h('li', {}, [h('span', { class: 'site-footer__hours', text: hoursText })]));
+  if (contato.instagram) fc.appendChild(h('li', {}, [h('a', { href: contato.instagram, target: '_blank', rel: 'noopener', text: 'Instagram @' + igUser })]));
   fc.appendChild(h('li', {}, [h('a', { href: '#agendamento', text: 'Solicitar consulta' })]));
   if (isDraft && !hasWhatsApp && !contato.email && !hasAddress) fc.insertBefore(h('li', {}, [pendingSpan('Contatos oficiais a confirmar')]), fc.firstChild);
 
@@ -315,6 +364,27 @@
     $('[data-footer-cro]').textContent = ' — ' + croText;
   } else if (isDraft) {
     $('[data-footer-cro]').textContent = ' — CRO-UF pendente de validação';
+  }
+
+  /* ---------- destaques e especialidade (seção Sobre) ---------- */
+  var facts = prof.destaques || [];
+  if (facts.length) {
+    var factsEl = $('[data-facts]');
+    facts.forEach(function (f) {
+      factsEl.appendChild(h('li', { class: 'about__fact' }, [h('span', { class: 'about__fact-value', text: f.valor }), h('span', { class: 'about__fact-text', text: f.texto })]));
+    });
+    factsEl.hidden = false;
+    factsEl.setAttribute('data-reveal', '');
+  }
+  var esp = prof.especialidade;
+  if (esp && esp.titulo) {
+    var espEl = $('[data-specialty]');
+    if (esp.confirmado) { espEl.textContent = esp.titulo + (croText ? ' — ' + croText : ''); espEl.hidden = false; }
+    else if (isDraft) {
+      espEl.appendChild(h('span', { class: 'badge', text: 'Pendente' }));
+      espEl.appendChild(document.createTextNode('"' + esp.titulo + '" só será publicado após a confirmação do título de especialista registrado no CRO.'));
+      espEl.hidden = false;
+    }
   }
 
   /* ---------- agenda externa (integração futura) ---------- */
@@ -459,14 +529,41 @@
   });
 
   $('[data-form-edit]').addEventListener('click', function () {
+    copyBtn.textContent = 'Copiar mensagem';
+    $('[data-copy-status]').textContent = '';
     success.hidden = true;
     form.hidden = false;
     field('nome').focus();
   });
-  if (!hasWhatsApp && !isDraft) {
-    var pendingNote = $('[data-success-pending] .draft-note');
-    pendingNote.innerHTML = 'Copie a mensagem abaixo e envie pelos canais da seção <a href="#contato">Contato</a>:';
+  /* sem WhatsApp configurado: textos e alternativas honestos (copiar mensagem / Instagram) */
+  if (!hasWhatsApp) {
+    $('[data-booking-lead]').textContent = 'Preencha seus dados e a sua solicitação fica pronta para ser enviada ao consultório.';
+    $('[data-booking-step2]').textContent = igUser ? 'Você copia a mensagem e a envia pelo Instagram do consultório.' : 'Você copia a mensagem e a envia ao consultório.';
+    if (!isDraft) $('[data-pending-note]').hidden = true;
+    if (igUser) {
+      var dm = $('[data-instagram-dm]');
+      dm.href = 'https://ig.me/m/' + encodeURIComponent(igUser);
+      dm.hidden = false;
+      $('[data-pending-instructions]').textContent = 'Copie a mensagem abaixo e envie pelo Instagram @' + igUser + ':';
+    }
   }
+  var copyBtn = $('[data-copy-message]');
+  copyBtn.addEventListener('click', function () {
+    var text = $('[data-message-preview]').textContent;
+    var done = function (ok) {
+      $('[data-copy-status]').textContent = ok ? 'Mensagem copiada.' : 'Não foi possível copiar automaticamente. Selecione o texto acima e copie.';
+      if (ok) copyBtn.textContent = 'Mensagem copiada ✓';
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      try {
+        var range = document.createRange(); range.selectNodeContents($('[data-message-preview]'));
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        done(document.execCommand('copy'));
+      } catch (err) { done(false); }
+    }
+  });
 
   /* ---------- WhatsApp flutuante ---------- */
   var waFloat = $('[data-wa-float]');
@@ -496,6 +593,58 @@
     var banner = $('[data-draft-banner]');
     banner.hidden = false;
     $('[data-draft-dismiss]').addEventListener('click', function () { banner.hidden = true; store('sessionStorage', 'el-draft-ok', '1'); });
+  }
+
+  /* ---------- vídeo de apresentação ---------- */
+  var video = $('[data-intro-video]');
+  if (video) {
+    var playBtn = $('[data-video-toggle]');
+    var soundBtn = $('[data-video-sound]');
+    var videoLoaded = false;
+    var userPaused = false;
+    var saveData = !!(navigator.connection && navigator.connection.saveData);
+    var canAutoplay = !reduceMotion && !saveData;
+    var loadVideo = function () {
+      if (videoLoaded) return;
+      videoLoaded = true;
+      $$('source[data-src]', video).forEach(function (s) { s.src = s.getAttribute('data-src'); });
+      video.load();
+    };
+    var play = function () { loadVideo(); var p = video.play(); if (p && p.catch) p.catch(function () { syncVideoUi(); }); };
+    var syncVideoUi = function () {
+      var playing = !video.paused && !video.ended;
+      playBtn.setAttribute('data-on', String(playing));
+      $('[data-video-toggle-label]').textContent = playing ? 'Pausar vídeo' : 'Reproduzir vídeo';
+      soundBtn.setAttribute('data-on', String(!video.muted));
+      $('[data-video-sound-label]').textContent = video.muted ? 'Ativar som do vídeo' : 'Desativar som do vídeo';
+    };
+    ['play', 'pause', 'volumechange', 'ended'].forEach(function (ev) { video.addEventListener(ev, syncVideoUi); });
+    playBtn.addEventListener('click', function () {
+      if (video.paused) { userPaused = false; play(); }
+      else { userPaused = true; video.pause(); }
+    });
+    soundBtn.addEventListener('click', function () {
+      video.muted = !video.muted;
+      if (!video.muted && video.paused) { userPaused = false; play(); }
+    });
+    if ('IntersectionObserver' in window) {
+      // baixa o vídeo só quando a seção se aproxima da tela
+      var nearIo = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) { loadVideo(); nearIo.disconnect(); }
+      }, { rootMargin: '400px 0px' });
+      nearIo.observe(video);
+      // toca (sem som) quando visível e pausa fora da tela, sem sobrescrever a escolha do visitante
+      var viewIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { if (canAutoplay && !userPaused) play(); }
+          else if (!video.paused) video.pause();
+        });
+      }, { threshold: 0.35 });
+      viewIo.observe(video);
+    } else {
+      loadVideo();
+    }
+    syncVideoUi();
   }
 
   /* ---------- revelação ao rolar ---------- */
@@ -539,8 +688,12 @@
   else if (contato.telefone) schema.telephone = '+55' + digits(contato.telefone);
   if (contato.email) schema.email = contato.email;
   if (hasAddress) {
-    schema.address = { '@type': 'PostalAddress', streetAddress: endereco.logradouro, addressLocality: endereco.cidade, addressRegion: endereco.uf, postalCode: endereco.cep, addressCountry: 'BR' };
+    schema.address = { '@type': 'PostalAddress', streetAddress: endereco.logradouro, addressLocality: endereco.cidade, addressRegion: endereco.uf, addressCountry: 'BR' };
+    if (endereco.cep) schema.address.postalCode = endereco.cep;
   }
+  var ohs = horarios.filter(function (x) { return x.diasSchema && x.abre && x.fecha; });
+  if (ohs.length) schema.openingHoursSpecification = ohs.map(function (x) { return { '@type': 'OpeningHoursSpecification', dayOfWeek: x.diasSchema, opens: x.abre, closes: x.fecha }; });
+  if (croText) schema.identifier = { '@type': 'PropertyValue', propertyID: 'CRO-' + prof.croUf, value: prof.cro };
   if (contato.instagram) schema.sameAs = [contato.instagram];
   var confirmed = (cfg.tratamentos || []).filter(function (t) { return !t.demo; });
   if (confirmed.length) schema.availableService = confirmed.map(function (t) { return { '@type': 'MedicalProcedure', name: t.nome }; });

@@ -22,9 +22,19 @@ window.SITE_CONFIG = {
     nome: 'Dra. Evelyn Lara',
     titulo: 'Cirurgiã-Dentista',
     /** Número de inscrição no CRO, ex.: '12345'. Obrigatório em publicidade odontológica — confirmar antes de publicar. */
-    cro: '',
+    cro: '60043',
     /** UF do CRO, ex.: 'SP'. */
-    croUf: '',
+    croUf: 'MG',
+    /**
+     * Título de especialista. Pelas normas do CFO, "especialista" só pode ser divulgado com especialidade
+     * registrada no CRO. Mantenha `confirmado: false` até a confirmação — no modo 'publicado' ele não aparece.
+     */
+    especialidade: { titulo: 'Especialista em clareamento dental', confirmado: false },
+    /** Destaques divulgados pela profissional (exibidos na seção "Sobre"). */
+    destaques: [
+      { valor: '5 anos', texto: 'cuidando de sorrisos em Campo Belo' },
+      { valor: '+200', texto: 'clareamentos realizados' },
+    ],
   },
 
   contato: {
@@ -33,23 +43,31 @@ window.SITE_CONFIG = {
     /** Telefone fixo/celular para ligação, no formato de exibição (ex.: '(11) 3333-4444'). */
     telefone: '',
     email: '',
-    instagram: '', // URL completa do perfil, ex.: 'https://instagram.com/usuario'
+    instagram: 'https://www.instagram.com/dra_evilynlara/', // URL completa do perfil
   },
 
   endereco: {
     /** Marque true SOMENTE depois que o endereço for validado pela profissional. */
-    validado: false,
-    logradouro: '', // 'Rua Exemplo, 123 — Sala 45'
+    validado: true,
+    logradouro: 'Rua Artur Bernardes, 265', // 'Rua Exemplo, 123 — Sala 45'
     bairro: '',
-    cidade: '',
-    uf: '',
+    cidade: 'Campo Belo',
+    uf: 'MG',
     cep: '',
     /** Link opcional do Google Maps; se vazio, é gerado a partir do endereço. */
     linkMaps: '',
   },
 
-  /** Horários confirmados, ex.: [{ dias: 'Segunda a sexta', horas: '9h às 18h' }] */
-  horarios: [],
+  /**
+   * Horários confirmados. `diasSchema`, `abre` e `fecha` alimentam os dados estruturados do Google
+   * (dias em inglês, formato do schema.org).
+   */
+  horarios: [
+    { dias: 'Segunda a sexta-feira', horas: '09h às 18h', diasSchema: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], abre: '09:00', fecha: '18:00' },
+  ],
+
+  /** Convênios atendidos, conforme divulgado pela profissional. Lista vazia = nada exibido. */
+  convenios: ['Bradesco Dental', 'Odontoprev'],
 
   agendamento: {
     /** 'whatsapp' hoje. Ponto preparado para futura integração com agenda externa. */
@@ -59,42 +77,70 @@ window.SITE_CONFIG = {
   },
 
   /**
-   * Tratamentos. ATENÇÃO: os itens com `demo: true` são EXEMPLOS de layout e
-   * NÃO representam serviços confirmados. No modo 'publicado' eles são ocultados.
-   * Para cada serviço confirmado pela profissional, remova `demo` (ou use false).
+   * Tratamentos oferecidos (lista confirmada pela profissional).
+   * `categoria` agrupa os itens na página, na ordem em que aparecem aqui.
+   * Itens com `demo: true` seriam tratados como exemplo e ficariam ocultos no modo 'publicado'.
    */
   tratamentos: [
     {
-      id: 'avaliacao',
-      nome: 'Consulta de avaliação',
-      resumo: 'Um primeiro encontro para ouvir você, examinar com calma e explicar cada possibilidade com clareza.',
-      detalhe: 'Na avaliação são conversados seus objetivos, histórico e incômodos. A partir dela é definido, junto com você, o planejamento mais adequado ao seu caso.',
-      icone: 'stethoscope',
-      demo: true,
+      id: 'clinico-geral', categoria: 'Cuidado essencial', icone: 'stethoscope',
+      nome: 'Clínico geral',
+      resumo: 'Atendimento odontológico geral: avaliação, diagnóstico e orientação para cuidar da saúde da sua boca como um todo.',
+      detalhe: 'É o ponto de partida do cuidado. A partir da avaliação, você entende o que precisa ser tratado e quais são as opções indicadas para o seu caso.',
     },
     {
-      id: 'prevencao',
-      nome: 'Prevenção e limpeza',
-      resumo: 'Cuidados periódicos para manter dentes e gengivas saudáveis ao longo do tempo.',
-      detalhe: 'Consultas de manutenção com orientação de higiene personalizada, para que o cuidado continue também em casa.',
-      icone: 'sparkle',
-      demo: true,
+      id: 'limpeza', categoria: 'Cuidado essencial', icone: 'shield',
+      nome: 'Limpeza dentária',
+      resumo: 'Limpeza profissional e orientação de higiene para manter dentes e gengivas saudáveis.',
+      detalhe: 'Remove a placa e o tártaro que a escovação do dia a dia não alcança, com orientações personalizadas para o cuidado em casa.',
     },
     {
-      id: 'restauracoes',
-      nome: 'Restaurações',
-      resumo: 'Tratamento de dentes com cáries ou desgastes, buscando função e aparência natural.',
-      detalhe: 'O material e a técnica são indicados após avaliação individual, sempre com explicação prévia de cada etapa.',
-      icone: 'tooth',
-      demo: true,
+      id: 'restauracoes', categoria: 'Cuidado essencial', icone: 'tooth',
+      nome: 'Restaurações dentárias',
+      resumo: 'Restauração de dentes afetados por cáries, fraturas ou desgastes, buscando devolver forma e função.',
+      detalhe: 'O material e a técnica são escolhidos após a avaliação, sempre com explicação prévia de cada etapa.',
     },
     {
-      id: 'estetica',
-      nome: 'Estética do sorriso',
-      resumo: 'Procedimentos para harmonizar o sorriso respeitando suas características naturais.',
-      detalhe: 'As opções estéticas dependem de avaliação clínica. Nenhum resultado é prometido antes do planejamento individual.',
-      icone: 'smile',
-      demo: true,
+      id: 'endodontia', categoria: 'Cuidado essencial', icone: 'canal',
+      nome: 'Endodontia (tratamento de canal)',
+      resumo: 'Tratamento do canal do dente quando a polpa está inflamada ou infectada, com o objetivo de preservar o dente.',
+      detalhe: 'A indicação é confirmada na avaliação clínica, e cada etapa é explicada antes de começar.',
+    },
+    {
+      id: 'proteses', categoria: 'Reabilitação oral', icone: 'bridge',
+      nome: 'Próteses fixas e removíveis',
+      resumo: 'Reposição de dentes ausentes com próteses fixas ou removíveis, para recuperar a mastigação e a estética do sorriso.',
+      detalhe: 'O tipo de prótese é indicado de acordo com a sua saúde bucal, suas necessidades e preferências, e definido em conjunto após a avaliação.',
+    },
+    {
+      id: 'implantes', categoria: 'Reabilitação oral', icone: 'implant',
+      nome: 'Implantes dentários',
+      resumo: 'Reposição de dentes ausentes com implantes, planejada a partir da avaliação da sua saúde bucal.',
+      detalhe: 'A indicação depende da avaliação clínica e pode exigir exames complementares. O planejamento, as etapas e os prazos são conversados com você antes do início.',
+    },
+    {
+      id: 'ortodontia', categoria: 'Ortodontia', icone: 'braces',
+      nome: 'Ortodontia',
+      resumo: 'Tratamento com aparelho ortodôntico para alinhar os dentes e ajustar a mordida.',
+      detalhe: 'O tipo de aparelho e a duração do tratamento são definidos após a avaliação e variam de caso para caso.',
+    },
+    {
+      id: 'clareamento', categoria: 'Estética', icone: 'sparkle',
+      nome: 'Clareamento dental',
+      resumo: 'Tratamento estético para clarear os dentes, com avaliação prévia e orientação em cada etapa.',
+      detalhe: 'A indicação, a técnica e o número de sessões são definidos após avaliação da saúde dos seus dentes e gengivas. Os resultados variam de pessoa para pessoa e são conversados com você antes de começar.',
+    },
+    {
+      id: 'facetas', categoria: 'Estética', icone: 'smile',
+      nome: 'Facetas estéticas',
+      resumo: 'Procedimento estético para melhorar a cor, o formato ou o alinhamento aparente dos dentes.',
+      detalhe: 'A indicação, o material e a quantidade de facetas são definidos após avaliação e planejamento, respeitando as características do seu sorriso.',
+    },
+    {
+      id: 'harmonizacao', categoria: 'Estética', icone: 'face',
+      nome: 'Harmonização orofacial',
+      resumo: 'Procedimentos para o equilíbrio estético e funcional da face, indicados após avaliação individual.',
+      detalhe: 'Cada procedimento é indicado com critério, respeitando suas características e expectativas. Os resultados variam de pessoa para pessoa.',
     },
   ],
 
@@ -115,7 +161,7 @@ window.SITE_CONFIG = {
   faq: [
     {
       pergunta: 'Como posso agendar uma consulta?',
-      resposta: 'Preencha o formulário de agendamento nesta página ou fale diretamente pelo WhatsApp. A solicitação é enviada ao consultório e a data e o horário só ficam reservados após a confirmação.',
+      resposta: 'Preencha o formulário de agendamento nesta página e envie a mensagem gerada ao consultório. A data e o horário só ficam reservados após a confirmação.',
     },
     {
       pergunta: 'Como funciona a primeira avaliação?',
@@ -123,19 +169,23 @@ window.SITE_CONFIG = {
     },
     {
       pergunta: 'Quais tratamentos estão disponíveis?',
-      resposta: 'Os tratamentos oferecidos estão descritos na seção Tratamentos. Se tiver dúvida sobre um procedimento específico, envie sua pergunta pelo WhatsApp.',
+      resposta: 'Os tratamentos oferecidos estão descritos na seção Tratamentos. Se tiver dúvida sobre um procedimento específico, envie sua pergunta pelos canais da seção Contato.',
+    },
+    {
+      pergunta: 'Quais convênios são atendidos?',
+      resposta: '{convenios}',
     },
     {
       pergunta: 'Como posso obter informações sobre valores?',
-      resposta: 'Os valores dependem do planejamento definido após a avaliação individual. Para informações iniciais, entre em contato pelo WhatsApp.',
+      resposta: 'Os valores dependem do planejamento definido após a avaliação individual. Para informações iniciais, entre em contato pelos canais da seção Contato.',
     },
     {
-      pergunta: 'Onde fica o consultório?',
+      pergunta: 'Onde fica o consultório e qual o horário de atendimento?',
       resposta: '{endereco}',
     },
     {
       pergunta: 'Como entrar em contato?',
-      resposta: 'Pelo formulário de agendamento, pelo botão de WhatsApp ou pelos canais listados na seção Contato.',
+      resposta: 'Pelo formulário de agendamento ou pelos canais listados na seção Contato, como o Instagram.',
     },
   ],
 

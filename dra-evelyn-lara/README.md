@@ -7,23 +7,31 @@ cd dra-evelyn-lara
 python3 -m http.server 8000   # acesse http://localhost:8000
 ```
 
-## Antes de publicar — checklist obrigatório
+## Dados confirmados (já no `config.js`)
 
-Tudo que é editável fica em **`assets/js/config.js`**. Campos vazios são tratados como *pendentes*: aparecem marcados no modo `rascunho` e **somem** no modo `publicado`. Nada fictício vai ao ar.
+- **Dra. Evelyn Lara**, Cirurgiã-Dentista, **CRO-MG 60043**
+- Rua Artur Bernardes, 265, Campo Belo – MG · segunda a sexta-feira, das 09h às 18h
+- Instagram: [@dra_evilynlara](https://www.instagram.com/dra_evilynlara/)
+- Convênios: Bradesco Dental e Odontoprev
+- Destaques: 5 anos cuidando de sorrisos em Campo Belo; mais de 200 clareamentos realizados
+- 10 tratamentos, em 4 categorias: clínico geral, limpeza, restaurações, endodontia, próteses, implantes, ortodontia, clareamento, facetas e harmonização orofacial
 
-| Item | Onde | Situação atual |
+## Antes de publicar: pendências
+
+Campos vazios aparecem marcados no modo `rascunho` e **somem** no modo `publicado`. Nada fictício vai ao ar.
+
+| Item | Onde | Situação |
 |---|---|---|
-| WhatsApp oficial (DDI+DDD+número) | `contato.whatsapp` | **pendente**: sem ele não há botão flutuante e o formulário só mostra a mensagem gerada |
-| CRO e UF | `profissional.cro`, `profissional.croUf` | **pendente**: a publicidade odontológica deve trazer nome e número de inscrição no CRO (normas do CFO) |
-| Endereço validado | `endereco.*` + `validado: true` | **pendente** |
-| Horários, e-mail, Instagram | `horarios`, `contato.*` | **pendentes** |
-| Lista real de tratamentos | `tratamentos` | os 4 itens atuais são **exemplos** (`demo: true`) e ficam ocultos no modo publicado |
-| Respostas do FAQ | `faq` | **rascunho**, revisar com a profissional |
-| Texto da seção "Sobre" | `index.html` (`#sobre`) | texto-base neutro, revisar |
+| WhatsApp oficial (DDI+DDD+número) | `contato.whatsapp` | **pendente**. Sem ele, o formulário oferece "Copiar mensagem" e "Enviar pelo Instagram", e o botão flutuante não aparece |
+| Título "Especialista em clareamento dental" | `profissional.especialidade.confirmado` | **não publicado**. Pelas normas do CFO, "especialista" exige especialidade registrada no CRO, e não existe especialidade "clareamento" na lista do CFO (a mais próxima é Dentística). Confirmar antes de ativar |
+| CEP e bairro | `endereco.cep`, `endereco.bairro` | opcionais; melhoram o Google Maps e os dados estruturados |
+| Respostas do FAQ e texto "Sobre" | `faq`, `index.html#sobre` | revisar com a profissional |
 | Fotos do consultório | `galeria` | sem fotos, a seção não aparece no site publicado |
-| Depoimentos | `depoimentos` | só reais e autorizados por escrito; sem eles a seção não aparece |
-| Política de privacidade | `privacidade.html` | texto-base **sem revisão jurídica**; completar os trechos entre colchetes |
-| Domínio | `dominio` + `og:image` absoluto e `canonical` no `<head>` + `robots.txt` | pendente |
+| Depoimentos | `depoimentos` | só reais e autorizados por escrito |
+| Política de privacidade | `privacidade.html` | texto-base **sem revisão jurídica**; completar os colchetes |
+| Domínio | `dominio` + `og:image` absoluto + `robots.txt` | pendente |
+
+Observação: o bordado do jaleco e o Instagram usam a grafia **"Evilyn"**, e o site usa **"Evelyn"** (como na capa e no nome profissional informado). Confirme a grafia oficial.
 
 Depois disso, troque `modo: 'rascunho'` por `modo: 'publicado'`.
 
@@ -31,16 +39,26 @@ Depois disso, troque `modo: 'rascunho'` por `modo: 'publicado'`.
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Página única: hero, sobre, tratamentos, diferenciais, ambiente, depoimentos, agendamento, FAQ, contato e rodapé |
+| `index.html` | Página única: hero, sobre, tratamentos, diferenciais, ambiente, depoimentos, vídeo de apresentação, agendamento, FAQ, contato e rodapé |
 | `assets/css/styles.css` | Tokens de design (cores, tipografia, espaços, raios, sombras, transições) e todos os estilos, mobile-first |
 | `assets/js/config.js` | **Configuração central** (dados da profissional, serviços, FAQ etc.) |
 | `assets/js/main.js` | Menu, header, revelação ao rolar, formulário, WhatsApp, FAQ, galeria/lightbox, carrossel e dados estruturados |
 | `privacidade.html` / `404.html` | Política de privacidade (texto-base) e página de erro |
-| `assets/img/` | Capa original da cliente (AVIF/WebP em 800, 1200 e 1672 px), retrato da seção "Sobre", imagem de compartilhamento e ícones |
+| `assets/img/` | Capa original (AVIF/WebP em 800, 1200 e 1672 px), foto de jaleco da seção "Sobre" (480 e 768 px, sem recorte), imagem de compartilhamento e ícones |
+| `assets/video/` | Vídeo de apresentação (WebM 0,9 MB / MP4 1,2 MB, 712×1280) e pôster |
 
 ## Primeira dobra (hero)
 
 A capa enviada pela cliente aparece **inteira, sem recorte**, em largura total (proporção 1672×941). O título, a headline e o texto já fazem parte da arte; em HTML eles ficam visualmente ocultos no desktop, mas continuam disponíveis para leitores de tela e para o Google. No desktop (≥ 1024 px), o botão "Agende sua Consulta" real fica exatamente sobre o botão desenhado na arte, posicionado em unidades `cqw` para acompanhar qualquer largura, e "Conheça os tratamentos" fica ao lado. No celular e no tablet, a imagem também aparece inteira, e o texto e os botões vêm logo abaixo, em tamanho legível. O cabeçalho reproduz a variação de tom da borda superior da foto.
+
+## Vídeo de apresentação
+
+O vídeo enviado pela cliente (8 s, vertical, trilha musical sem fala) foi otimizado de 2,4 MB para 0,9 MB (WebM) e 1,2 MB (MP4). O arquivo original tinha faixas pretas de 3 a 4 px nas laterais nos primeiros 5,6 s, removidas na conversão. Nenhuma parte da imagem foi cortada. Comportamento:
+
+- só é baixado quando a seção se aproxima da tela;
+- toca sem som quando visível e pausa fora da tela;
+- botões de pausar/reproduzir e de ativar o som, acessíveis por teclado;
+- com "reduzir movimento" ou economia de dados, não toca sozinho.
 
 ## Agendamento
 
@@ -53,7 +71,7 @@ Integração futura: o objeto `Agendamento.preparar()` em `main.js` é o ponto �
 ## Qualidade verificada
 
 - Sem rolagem horizontal em 360, 390, 430, 768, 1024, 1440 e 1920 px; sem erros de console.
-- 39 verificações automatizadas (Playwright) de menu, formulário, WhatsApp, FAQ, carrossel, lightbox, modos rascunho e publicado, JSON-LD e `prefers-reduced-motion`.
+- 65 verificações automatizadas (Playwright): menu, formulário, WhatsApp/Instagram, copiar mensagem, FAQ, tratamentos por categoria, carrossel, lightbox, vídeo, modos rascunho e publicado, JSON-LD e `prefers-reduced-motion`.
 - Contraste AA nos pares de cor de texto principais.
 - Core Web Vitals **não foram medidos** em produção. A imagem do hero tem `preload` e `fetchpriority="high"` e as demais usam lazy loading.
 

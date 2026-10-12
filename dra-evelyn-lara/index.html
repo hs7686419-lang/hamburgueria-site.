@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Dra. Evelyn Lara | Cirurgiã-Dentista — Cuidado, confiança e saúde para o seu sorriso</title>
-<meta name="description" content="Atendimento odontológico humanizado com a Dra. Evelyn Lara, cirurgiã-dentista. Tratamentos personalizados, atenção aos detalhes e comunicação clara. Solicite sua consulta.">
+<title>Dra. Evelyn Lara | Cirurgiã-Dentista em Campo Belo – MG</title>
+<meta name="description" content="Dra. Evelyn Lara, cirurgiã-dentista (CRO-MG 60043) em Campo Belo – MG. Clínico geral, clareamento, restaurações, canal, próteses, implantes, ortodontia, facetas e harmonização orofacial. Atende Bradesco Dental e Odontoprev.">
 <meta name="theme-color" content="#4B2925">
 <meta name="robots" content="index, follow">
 <!-- Quando houver domínio definitivo, descomente e ajuste:
@@ -13,8 +13,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Dra. Evelyn Lara | Cirurgiã-Dentista">
-<meta property="og:title" content="Dra. Evelyn Lara | Cirurgiã-Dentista">
-<meta property="og:description" content="Cuidado, confiança e saúde para o seu sorriso. Atendimento odontológico humanizado e personalizado.">
+<meta property="og:title" content="Dra. Evelyn Lara | Cirurgiã-Dentista em Campo Belo – MG">
+<meta property="og:description" content="Cuidado, confiança e saúde para o seu sorriso. Atendimento odontológico humanizado em Campo Belo – MG.">
 <!-- Troque pelo URL ABSOLUTO após definir o domínio (WhatsApp e redes sociais exigem): -->
 <meta property="og:image" content="assets/img/og-evelyn-lara.jpg">
 <meta property="og:image:width" content="1200">
@@ -111,10 +111,12 @@
   <section class="section about" id="sobre" aria-labelledby="sobre-title">
     <div class="container about__grid">
       <figure class="about__figure" data-reveal>
+        <!-- Foto enviada pela cliente, exibida inteira (proporção original 768×1376, sem recorte). -->
         <picture>
-          <source type="image/avif" srcset="assets/img/evelyn-lara-retrato.avif">
-          <img src="assets/img/evelyn-lara-retrato.webp" width="520" height="650" loading="lazy" decoding="async"
-               alt="Retrato da Dra. Evelyn Lara sorrindo, com cabelos longos e conjunto rosé">
+          <source type="image/avif" srcset="assets/img/dra-evelyn-lara-jaleco-480.avif 480w, assets/img/dra-evelyn-lara-jaleco-768.avif 768w" sizes="(min-width: 768px) 400px, 82vw">
+          <source type="image/webp" srcset="assets/img/dra-evelyn-lara-jaleco-480.webp 480w, assets/img/dra-evelyn-lara-jaleco-768.webp 768w" sizes="(min-width: 768px) 400px, 82vw">
+          <img src="assets/img/dra-evelyn-lara-jaleco-768.webp" width="768" height="1376" loading="lazy" decoding="async"
+               alt="Dra. Evelyn Lara sorrindo, de jaleco branco e braços cruzados, em fundo cinza-claro">
         </picture>
         <figcaption class="about__caption"><span>Dra. Evelyn Lara</span> Cirurgiã-Dentista<span class="about__cro" data-cro hidden></span></figcaption>
       </figure>
@@ -127,6 +129,8 @@
           <p>Cada pessoa chega ao consultório com uma história, expectativas e, muitas vezes, alguma insegurança. Por isso, o atendimento começa pela escuta: entender o que você sente, o que deseja e o que é importante para você.</p>
           <p>A partir dessa conversa, cada etapa é explicada com clareza e transparência, para que você participe das decisões sobre o seu tratamento com tranquilidade e confiança.</p>
         </div>
+        <ul class="about__facts" data-facts hidden></ul>
+        <p class="about__specialty" data-specialty hidden></p>
         <ul class="about__values" data-reveal>
           <li><span class="about__values-k">Escuta</span><span>atenta e sem pressa</span></li>
           <li><span class="about__values-k">Clareza</span><span>em cada explicação</span></li>
@@ -150,7 +154,7 @@
         <p class="draft-note" data-demo-note hidden>
           <strong>Conteúdo demonstrativo.</strong> Os tratamentos abaixo são exemplos de layout e ainda não foram confirmados pela profissional. Eles não aparecem no site publicado até serem validados em <code>config.js</code>.
         </p>
-        <ol class="treatments__list" data-treatments></ol>
+        <div class="treatments__groups" data-treatments></div>
         <p class="treatments__empty" data-treatments-empty hidden>A lista de tratamentos será publicada em breve. Para saber se o atendimento que você procura está disponível, <a href="#agendamento">envie sua solicitação</a>.</p>
       </div>
     </div>
@@ -233,16 +237,54 @@
     </div>
   </section>
 
+  <!-- APRESENTAÇÃO EM VÍDEO — vídeo enviado pela cliente (8 s, vertical, trilha musical sem fala).
+       Começa sem som; carrega só perto da tela; não toca sozinho com "reduzir movimento". -->
+  <section class="section intro-video" id="apresentacao" aria-labelledby="apresentacao-title">
+    <div class="container intro-video__grid">
+      <div class="intro-video__media" data-reveal>
+        <div class="video-frame" data-video-frame>
+          <video class="video-frame__video" data-intro-video muted loop playsinline preload="none"
+                 width="712" height="1280" poster="assets/video/dra-evelyn-lara-apresentacao-poster.webp"
+                 aria-label="Vídeo de apresentação: Dra. Evelyn Lara sorrindo, de jaleco branco e braços cruzados. Trilha musical, sem fala.">
+            <source data-src="assets/video/dra-evelyn-lara-apresentacao.webm" type="video/webm">
+            <source data-src="assets/video/dra-evelyn-lara-apresentacao.mp4" type="video/mp4">
+          </video>
+          <div class="video-frame__controls">
+            <button class="video-btn" type="button" data-video-toggle data-on="false">
+              <svg class="video-btn__icon video-btn__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>
+              <svg class="video-btn__icon video-btn__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>
+              <span class="sr-only" data-video-toggle-label>Reproduzir vídeo</span>
+            </button>
+            <button class="video-btn" type="button" data-video-sound data-on="false">
+              <svg class="video-btn__icon video-btn__icon--muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+              <svg class="video-btn__icon video-btn__icon--sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+              <span class="sr-only" data-video-sound-label>Ativar som</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="intro-video__content">
+        <p class="eyebrow eyebrow--ink" data-reveal>Prazer em conhecer você</p>
+        <h2 class="section-title" id="apresentacao-title" data-reveal>Será um prazer <em>cuidar do seu sorriso.</em></h2>
+        <p class="lead" data-reveal>Do primeiro contato a cada etapa do tratamento, você encontra atenção, explicações claras e um cuidado pensado para a sua história.</p>
+        <div class="intro-video__actions" data-reveal>
+          <a class="btn btn--brown" href="#agendamento">Agende sua consulta</a>
+          <a class="link-arrow" href="#duvidas">Ver dúvidas frequentes <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- AGENDAMENTO -->
   <section class="section booking" id="agendamento" aria-labelledby="agendamento-title">
     <div class="container booking__grid">
       <div class="booking__intro">
         <p class="eyebrow" data-reveal>Agendamento</p>
         <h2 class="section-title section-title--light" id="agendamento-title" data-reveal>Vamos cuidar do <em>seu sorriso?</em></h2>
-        <p class="booking__lead" data-reveal>Preencha seus dados e a sua solicitação será encaminhada pelo WhatsApp ao consultório.</p>
+        <p class="booking__lead" data-reveal data-booking-lead>Preencha seus dados e a sua solicitação será encaminhada pelo WhatsApp ao consultório.</p>
         <ol class="booking__steps" data-reveal>
           <li><span>1</span>Você preenche o formulário.</li>
-          <li><span>2</span>Sua mensagem é aberta no WhatsApp, pronta para enviar.</li>
+          <li><span>2</span><span class="booking__step-text" data-booking-step2>Sua mensagem é aberta no WhatsApp, pronta para enviar.</span></li>
           <li><span>3</span>O consultório responde para confirmar data e horário.</li>
         </ol>
         <p class="booking__notice" data-reveal>
@@ -323,8 +365,14 @@
             </a>
           </div>
           <div data-success-pending hidden>
-            <p class="draft-note draft-note--dark"><strong>WhatsApp oficial pendente de configuração.</strong> Assim que o número for definido em <code>config.js</code>, este botão abrirá a conversa automaticamente. Mensagem gerada:</p>
+            <p class="draft-note draft-note--dark" data-pending-note><strong>WhatsApp oficial pendente de configuração.</strong> Assim que o número for definido em <code>config.js</code>, o botão do WhatsApp abrirá a conversa automaticamente.</p>
+            <p data-pending-instructions>Copie a mensagem abaixo e envie ao consultório:</p>
             <pre class="form-success__preview" data-message-preview></pre>
+            <div class="form-success__actions">
+              <button class="btn btn--rose btn--block" type="button" data-copy-message>Copiar mensagem</button>
+              <a class="btn btn--ghost-light btn--block" href="#" target="_blank" rel="noopener" data-instagram-dm hidden>Enviar pelo Instagram</a>
+            </div>
+            <p class="form__status" role="status" aria-live="polite" data-copy-status></p>
           </div>
           <p class="form-success__note">Lembre-se: a consulta só fica agendada após a confirmação do consultório.</p>
           <button class="btn btn--ghost-light btn--sm" type="button" data-form-edit>Editar dados</button>
