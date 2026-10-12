@@ -676,9 +676,18 @@
     waFloat.hidden = false;
     var blockers = new Set();
     var hero = $('.hero');
+    // controles que o botão nunca pode cobrir (ex.: pausar/som do vídeo, botão do mapa)
+    var guarded = $$('.video-frame__controls, [data-map-placeholder] .btn, .contact__actions');
+    var overlapsGuarded = function () {
+      var f = waFloat.getBoundingClientRect();
+      return guarded.some(function (el) {
+        var r = el.getBoundingClientRect();
+        return r.width && r.left < f.right + 8 && r.right > f.left - 8 && r.top < f.bottom + 8 && r.bottom > f.top - 8;
+      });
+    };
     var refreshFloat = function () {
       var pastHero = window.scrollY > hero.offsetHeight * 0.6;
-      waFloat.classList.toggle('is-visible', pastHero && blockers.size === 0);
+      waFloat.classList.toggle('is-visible', pastHero && blockers.size === 0 && !overlapsGuarded());
     };
     if ('IntersectionObserver' in window) {
       // some sobre o formulário e o rodapé para não cobrir campos, botões ou avisos
@@ -689,6 +698,7 @@
       [$('#agendamento'), $('.site-footer')].forEach(function (n) { floatIo.observe(n); });
     }
     window.addEventListener('scroll', refreshFloat, { passive: true });
+    window.addEventListener('resize', refreshFloat);
     refreshFloat();
   });
 

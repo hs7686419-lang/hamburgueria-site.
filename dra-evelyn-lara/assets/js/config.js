@@ -48,7 +48,7 @@ window.SITE_CONFIG = {
 
   contato: {
     /** WhatsApp oficial com DDD (ex.: '(37) 99999-0000' ou '5537999990000'). Vazio = pendente. Número inválido é ignorado e avisado no console. */
-    whatsapp: '',
+    whatsapp: '(35) 99236-6122',
     /** Telefone para ligação, com DDD (ex.: '(37) 3832-0000'). */
     telefone: '',
     email: '',

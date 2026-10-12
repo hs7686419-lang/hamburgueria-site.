@@ -11,6 +11,7 @@ python3 -m http.server 8000   # acesse http://localhost:8000
 
 - **Dra. Evelyn Lara**, Cirurgiã-Dentista · Clínica Geral, **CRO-MG 60043**
 - Rua Artur Bernardes, 265, Campo Belo – MG · segunda a sexta-feira, das 09h às 18h
+- WhatsApp: (35) 99236-6122
 - Instagram: [@dra_evilynlara](https://www.instagram.com/dra_evilynlara/)
 - Convênios: Bradesco Dental e Odontoprev
 - Destaques: 5 anos cuidando de sorrisos em Campo Belo; mais de 200 clareamentos realizados
@@ -22,7 +23,7 @@ Campos vazios aparecem marcados no modo `rascunho` e **somem** no modo `publicad
 
 | Item | Onde | Situação |
 |---|---|---|
-| WhatsApp oficial (DDI+DDD+número) | `contato.whatsapp` | **pendente**. Sem ele, o formulário oferece "Copiar mensagem" e "Enviar pelo Instagram", e o botão flutuante não aparece |
+| E-mail profissional | `contato.email` | pendente (opcional) |
 | Título "Especialista em clareamento dental" | `profissional.especialidade.confirmado` | **não publicado**. Pelas normas do CFO, "especialista" exige especialidade registrada no CRO, e não existe especialidade "clareamento" na lista do CFO (a mais próxima é Dentística). Confirmar antes de ativar |
 | CEP e bairro | `endereco.cep`, `endereco.bairro` | opcionais; melhoram o Google Maps e os dados estruturados |
 | Respostas do FAQ e texto "Sobre" | `faq`, `index.html#sobre` | revisar com a profissional |
@@ -33,7 +34,7 @@ Campos vazios aparecem marcados no modo `rascunho` e **somem** no modo `publicad
 
 **Qualificação "Clínica Geral" (`profissional.qualificacao`):** pelo Código de Ética Odontológica, áreas de atuação e procedimentos anunciados devem vir precedidos do título de especialidade registrada no CRO ou da qualificação de clínico geral. Por isso a linha "Cirurgiã-Dentista · Clínica Geral · CRO-MG 60043" aparece antes da lista de tratamentos, na legenda da foto e no rodapé. Se ela tiver especialidade registrada, informe para ajustar.
 
-Observação: o bordado do jaleco e o Instagram usam a grafia **"Evilyn"**, e o site usa **"Evelyn"** (como na capa e no nome profissional informado). Confirme a grafia oficial.
+Grafia confirmada: **Evelyn Lara**. O perfil do Instagram continua sendo @dra_evilynlara, que é o endereço real dele.
 
 ### Para publicar
 
@@ -92,7 +93,7 @@ Integração futura: o objeto `Agendamento.preparar()` em `main.js` é o ponto �
 ## Qualidade verificada
 
 - Sem rolagem horizontal em 360, 390, 430, 768, 1024, 1440 e 1920 px; sem erros de console.
-- 105 verificações automatizadas (Playwright): menu, formulário, telefone, WhatsApp/Instagram, copiar mensagem, FAQ, tratamentos, carrossel, lightbox, vídeo, modos rascunho e publicado, JSON-LD, site sem JavaScript, falha do `main.js` ou do `config.js`, 404 em caminhos aninhados e `prefers-reduced-motion`.
+- 112 verificações automatizadas (Playwright): menu, formulário, telefone, WhatsApp real e fluxo sem WhatsApp, Instagram, copiar mensagem, FAQ, tratamentos, carrossel, lightbox, vídeo, modos rascunho e publicado, JSON-LD, site sem JavaScript, falha do `main.js` ou do `config.js`, 404 em caminhos aninhados e `prefers-reduced-motion`.
 - Revisão independente em 5 frentes (conformidade CFO/LGPD, acessibilidade WCAG 2.2, visual, JavaScript, performance/SEO), com cada achado verificado antes de ser corrigido.
 - Contraste AA nos pares de cor de texto principais.
 - Core Web Vitals **não foram medidos** em produção. A imagem do hero tem `preload` e `fetchpriority="high"` e as demais usam lazy loading.
