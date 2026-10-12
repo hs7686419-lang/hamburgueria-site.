@@ -15,12 +15,21 @@ window.SITE_CONFIG = {
   /** 'rascunho' (pré-visualização, mostra pendências) | 'publicado' (oculta tudo que não foi confirmado) */
   modo: 'rascunho',
 
-  /** Domínio definitivo, sem barra no final (ex.: 'https://www.draevelynlara.com.br'). Usado em canonical e dados estruturados. */
+  /**
+   * Domínio definitivo, sem barra no final (ex.: 'https://www.draevelynlara.com.br'). Usado nos dados estruturados.
+   * Atenção: as prévias de link (WhatsApp, Facebook) e o canonical precisam ser escritos direto no <head> do
+   * index.html (og:image absoluto, og:url e link canonical), porque esses robôs não executam JavaScript.
+   */
   dominio: '',
 
   profissional: {
     nome: 'Dra. Evelyn Lara',
     titulo: 'Cirurgiã-Dentista',
+    /**
+     * Qualificação exibida antes das áreas de atuação. Pelo Código de Ética Odontológica (CFO), áreas de atuação
+     * e procedimentos devem ser precedidos do título de especialidade registrada no CRO ou da qualificação de clínico geral.
+     */
+    qualificacao: 'Clínica Geral',
     /** Número de inscrição no CRO, ex.: '12345'. Obrigatório em publicidade odontológica — confirmar antes de publicar. */
     cro: '60043',
     /** UF do CRO, ex.: 'SP'. */
@@ -38,9 +47,9 @@ window.SITE_CONFIG = {
   },
 
   contato: {
-    /** WhatsApp oficial só com dígitos, com DDI + DDD (ex.: '5511999999999'). Vazio = pendente. */
+    /** WhatsApp oficial com DDD (ex.: '(37) 99999-0000' ou '5537999990000'). Vazio = pendente. Número inválido é ignorado e avisado no console. */
     whatsapp: '',
-    /** Telefone fixo/celular para ligação, no formato de exibição (ex.: '(11) 3333-4444'). */
+    /** Telefone para ligação, com DDD (ex.: '(37) 3832-0000'). */
     telefone: '',
     email: '',
     instagram: 'https://www.instagram.com/dra_evilynlara/', // URL completa do perfil
@@ -83,8 +92,8 @@ window.SITE_CONFIG = {
    */
   tratamentos: [
     {
-      id: 'clinico-geral', categoria: 'Cuidado essencial', icone: 'stethoscope',
-      nome: 'Clínico geral',
+      id: 'clinica-geral', categoria: 'Cuidado essencial', icone: 'stethoscope',
+      nome: 'Clínica geral',
       resumo: 'Atendimento odontológico geral: avaliação, diagnóstico e orientação para cuidar da saúde da sua boca como um todo.',
       detalhe: 'É o ponto de partida do cuidado. A partir da avaliação, você entende o que precisa ser tratado e quais são as opções indicadas para o seu caso.',
     },
@@ -102,7 +111,7 @@ window.SITE_CONFIG = {
     },
     {
       id: 'endodontia', categoria: 'Cuidado essencial', icone: 'canal',
-      nome: 'Endodontia (tratamento de canal)',
+      nome: 'Tratamento de canal (endodontia)',
       resumo: 'Tratamento do canal do dente quando a polpa está inflamada ou infectada, com o objetivo de preservar o dente.',
       detalhe: 'A indicação é confirmada na avaliação clínica, e cada etapa é explicada antes de começar.',
     },
@@ -119,8 +128,8 @@ window.SITE_CONFIG = {
       detalhe: 'A indicação depende da avaliação clínica e pode exigir exames complementares. O planejamento, as etapas e os prazos são conversados com você antes do início.',
     },
     {
-      id: 'ortodontia', categoria: 'Ortodontia', icone: 'braces',
-      nome: 'Ortodontia',
+      id: 'ortodontia', categoria: 'Alinhamento dos dentes', icone: 'braces',
+      nome: 'Tratamento ortodôntico com aparelho',
       resumo: 'Tratamento com aparelho ortodôntico para alinhar os dentes e ajustar a mordida.',
       detalhe: 'O tipo de aparelho e a duração do tratamento são definidos após a avaliação e variam de caso para caso.',
     },

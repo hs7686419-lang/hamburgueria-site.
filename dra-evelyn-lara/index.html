@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dra. Evelyn Lara | Cirurgiã-Dentista em Campo Belo – MG</title>
-<meta name="description" content="Dra. Evelyn Lara, cirurgiã-dentista (CRO-MG 60043) em Campo Belo – MG. Clínico geral, clareamento, restaurações, canal, próteses, implantes, ortodontia, facetas e harmonização orofacial. Atende Bradesco Dental e Odontoprev.">
+<meta name="description" content="Dra. Evelyn Lara, cirurgiã-dentista (CRO-MG 60043) em Campo Belo – MG. Atende Bradesco Dental e Odontoprev. Clareamento, implantes, ortodontia e mais.">
 <meta name="theme-color" content="#4B2925">
-<meta name="robots" content="index, follow">
+<!-- RASCUNHO: "noindex" impede que a pré-visualização apareça no Google.
+     Ao publicar (modo: 'publicado' no config.js), troque para: <meta name="robots" content="index, follow"> -->
+<meta name="robots" content="noindex, nofollow">
 <!-- Quando houver domínio definitivo, descomente e ajuste:
 <link rel="canonical" href="https://www.SEU-DOMINIO.com.br/">
 -->
@@ -14,7 +16,7 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Dra. Evelyn Lara | Cirurgiã-Dentista">
 <meta property="og:title" content="Dra. Evelyn Lara | Cirurgiã-Dentista em Campo Belo – MG">
-<meta property="og:description" content="Cuidado, confiança e saúde para o seu sorriso. Atendimento odontológico humanizado em Campo Belo – MG.">
+<meta property="og:description" content="Dra. Evelyn Lara, cirurgiã-dentista – CRO-MG 60043. Atendimento odontológico humanizado em Campo Belo – MG.">
 <!-- Troque pelo URL ABSOLUTO após definir o domínio (WhatsApp e redes sociais exigem): -->
 <meta property="og:image" content="assets/img/og-evelyn-lara.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,20 +26,28 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preload" as="image" type="image/avif" href="assets/img/capa-evelyn-lara-1672.avif" imagesrcset="assets/img/capa-evelyn-lara-800.avif 800w, assets/img/capa-evelyn-lara-1200.avif 1200w, assets/img/capa-evelyn-lara-1672.avif 1672w" imagesizes="100vw" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap">
+<!-- fontes hospedadas no próprio site (sem conexão com terceiros nem bloqueio de renderização) -->
+<link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/styles.css">
-<script>document.documentElement.classList.add('js')</script>
+<script>
+  // A animação de entrada só esconde conteúdo quando o JavaScript está ativo. Se o main.js não carregar
+  // ou falhar, o conteúdo volta a aparecer (o main.js marca "reveal-ready" ao terminar).
+  (function (r) {
+    r.classList.add('js');
+    window.addEventListener('load', function () { if (!r.classList.contains('reveal-ready')) r.classList.remove('js'); });
+  })(document.documentElement);
+</script>
 <script src="assets/js/config.js" defer></script>
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/main.js" defer onerror="document.documentElement.classList.remove('js')"></script>
+<!--pr:schema--><script type="application/ld+json" id="schema-ld">{"@context":"https://schema.org","@type":"Dentist","name":"Dra. Evelyn Lara","description":"Atendimento odontológico humanizado, com atenção aos detalhes e tratamentos personalizados.","address":{"@type":"PostalAddress","streetAddress":"Rua Artur Bernardes, 265","addressLocality":"Campo Belo","addressRegion":"MG","addressCountry":"BR"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"18:00"}],"identifier":{"@type":"PropertyValue","propertyID":"CRO-MG","value":"60043"},"sameAs":["https://www.instagram.com/dra_evilynlara/"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Tratamentos","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Clínica geral"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Limpeza dentária"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Restaurações dentárias"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Tratamento de canal (endodontia)"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Próteses fixas e removíveis"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Implantes dentários"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Tratamento ortodôntico com aparelho"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Clareamento dental"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Facetas estéticas"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Harmonização orofacial"}}]}}</script><!--/pr:schema-->
 </head>
 <body>
 <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="site-header" data-header>
   <div class="container site-header__inner">
-    <a class="brand" href="#inicio" aria-label="Dra. Evelyn Lara — início">
+    <a class="brand" href="#inicio">
       <span class="brand__name">Evelyn Lara</span>
       <span class="brand__role">Cirurgiã-Dentista</span>
     </a>
@@ -118,7 +128,7 @@
           <img src="assets/img/dra-evelyn-lara-jaleco-768.webp" width="768" height="1376" loading="lazy" decoding="async"
                alt="Dra. Evelyn Lara sorrindo, de jaleco branco e braços cruzados, em fundo cinza-claro">
         </picture>
-        <figcaption class="about__caption"><span>Dra. Evelyn Lara</span> Cirurgiã-Dentista<span class="about__cro" data-cro hidden></span></figcaption>
+        <!--pr:caption--><figcaption class="about__caption"><span>Dra. Evelyn Lara</span> Cirurgiã-Dentista<span data-qualificacao=""> · Clínica Geral</span><span class="about__cro" data-cro="">CRO-MG&nbsp;60043</span></figcaption><!--/pr:caption-->
       </figure>
 
       <div class="about__content">
@@ -129,8 +139,8 @@
           <p>Cada pessoa chega ao consultório com uma história, expectativas e, muitas vezes, alguma insegurança. Por isso, o atendimento começa pela escuta: entender o que você sente, o que deseja e o que é importante para você.</p>
           <p>A partir dessa conversa, cada etapa é explicada com clareza e transparência, para que você participe das decisões sobre o seu tratamento com tranquilidade e confiança.</p>
         </div>
-        <ul class="about__facts" data-facts hidden></ul>
-        <p class="about__specialty" data-specialty hidden></p>
+        <!--pr:facts--><ul class="about__facts" data-facts=""><li class="about__fact"><span class="about__fact-value">5 anos</span><span class="about__fact-text">cuidando de sorrisos em Campo Belo</span></li><li class="about__fact"><span class="about__fact-value">+200</span><span class="about__fact-text">clareamentos realizados</span></li></ul><!--/pr:facts-->
+        <!--pr:specialty--><p class="about__specialty" data-specialty="" hidden=""></p><!--/pr:specialty-->
         <ul class="about__values" data-reveal>
           <li><span class="about__values-k">Escuta</span><span>atenta e sem pressa</span></li>
           <li><span class="about__values-k">Clareza</span><span>em cada explicação</span></li>
@@ -154,7 +164,8 @@
         <p class="draft-note" data-demo-note hidden>
           <strong>Conteúdo demonstrativo.</strong> Os tratamentos abaixo são exemplos de layout e ainda não foram confirmados pela profissional. Eles não aparecem no site publicado até serem validados em <code>config.js</code>.
         </p>
-        <div class="treatments__groups" data-treatments></div>
+        <!--pr:qualification--><p class="treatments__qualification" data-treatments-qualification="">Dra. Evelyn Lara · Cirurgiã-Dentista · Clínica Geral · CRO-MG&nbsp;60043</p><!--/pr:qualification-->
+        <!--pr:treatments--><div class="treatments__groups" data-treatments=""><nav class="treatments__nav" aria-label="Categorias de tratamento"><ul><li><a href="#trat-cat-1">Cuidado essencial</a></li><li><a href="#trat-cat-2">Reabilitação oral</a></li><li><a href="#trat-cat-3">Alinhamento dos dentes</a></li><li><a href="#trat-cat-4">Estética</a></li></ul></nav><section class="treatment-group" aria-labelledby="trat-cat-1-t" id="trat-cat-1"><h3 class="treatment-group__title" id="trat-cat-1-t">Cuidado essencial</h3><ol class="treatments__list"><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-clinica-geral"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3v6a5 5 0 0 0 10 0V3"></path><path d="M10 14v2a5 5 0 0 0 10 0v-2"></path><circle cx="20" cy="12" r="2"></circle></svg></span><span>Clínica geral</span></h4><div class="treatment__body"><p class="treatment__summary">Atendimento odontológico geral: avaliação, diagnóstico e orientação para cuidar da saúde da sua boca como um todo.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Clínica geral</span></summary><p class="treatment__detail">É o ponto de partida do cuidado. A partir da avaliação, você entende o que precisa ser tratado e quais são as opções indicadas para o seu caso.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="clinica-geral">Consultar disponibilidade<span class="sr-only"> para Clínica geral</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-limpeza"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.3 8 9 4.6-.7 8-4 8-9V6Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span>Limpeza dentária</span></h4><div class="treatment__body"><p class="treatment__summary">Limpeza profissional e orientação de higiene para manter dentes e gengivas saudáveis.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Limpeza dentária</span></summary><p class="treatment__detail">Remove a placa e o tártaro que a escovação do dia a dia não alcança, com orientações personalizadas para o cuidado em casa.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="limpeza">Consultar disponibilidade<span class="sr-only"> para Limpeza dentária</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-restauracoes"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3c-2.5 0-4 2-4 4.5 0 2 .8 3.4 1.4 5 .6 1.8.8 4 1.4 6.2.4 1.5 1 2.3 1.8 2.3 1.2 0 1.4-1.7 1.8-3.6.3-1.4.7-2.9 2.6-2.9s2.3 1.5 2.6 2.9c.4 1.9.6 3.6 1.8 3.6.8 0 1.4-.8 1.8-2.3.6-2.2.8-4.4 1.4-6.2.6-1.6 1.4-3 1.4-5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3Z"></path></svg></span><span>Restaurações dentárias</span></h4><div class="treatment__body"><p class="treatment__summary">Restauração de dentes afetados por cáries, fraturas ou desgastes, buscando devolver forma e função.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Restaurações dentárias</span></summary><p class="treatment__detail">O material e a técnica são escolhidos após a avaliação, sempre com explicação prévia de cada etapa.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="restauracoes">Consultar disponibilidade<span class="sr-only"> para Restaurações dentárias</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-endodontia"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3c-2.5 0-4 2-4 4.5 0 2 .8 3.4 1.4 5 .6 1.8.8 4 1.4 6.2.4 1.5 1 2.3 1.8 2.3 1.2 0 1.4-1.7 1.8-3.6.3-1.4.7-2.9 2.6-2.9s2.3 1.5 2.6 2.9c.4 1.9.6 3.6 1.8 3.6.8 0 1.4-.8 1.8-2.3.6-2.2.8-4.4 1.4-6.2.6-1.6 1.4-3 1.4-5C21 5 19.5 3 17 3c-2 0-3 1-5 1S9 3 7 3Z"></path><path d="M10 9.5v5M14 9.5v5"></path></svg></span><span>Tratamento de canal (endodontia)</span></h4><div class="treatment__body"><p class="treatment__summary">Tratamento do canal do dente quando a polpa está inflamada ou infectada, com o objetivo de preservar o dente.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Tratamento de canal (endodontia)</span></summary><p class="treatment__detail">A indicação é confirmada na avaliação clínica, e cada etapa é explicada antes de começar.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="endodontia">Consultar disponibilidade<span class="sr-only"> para Tratamento de canal (endodontia)</span><span aria-hidden="true"> →</span></a></div></div></div></li></ol></section><section class="treatment-group" aria-labelledby="trat-cat-2-t" id="trat-cat-2"><h3 class="treatment-group__title" id="trat-cat-2-t">Reabilitação oral</h3><ol class="treatments__list"><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-proteses"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7.5C3 6.1 4.1 5 5.5 5h13C19.9 5 21 6.1 21 7.5V10c0 1.2-.8 2-1.8 2L18 19h-2l-1-5h-1.5l-1 5h-1l-1-5H9l-1 5H6l-1.2-7C3.8 12 3 11.2 3 10Z"></path></svg></span><span>Próteses fixas e removíveis</span></h4><div class="treatment__body"><p class="treatment__summary">Reposição de dentes ausentes com próteses fixas ou removíveis, para recuperar a mastigação e a estética do sorriso.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Próteses fixas e removíveis</span></summary><p class="treatment__detail">O tipo de prótese é indicado de acordo com a sua saúde bucal, suas necessidades e preferências, e definido em conjunto após a avaliação.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="proteses">Consultar disponibilidade<span class="sr-only"> para Próteses fixas e removíveis</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-implantes"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10l-1.5 5h-7Z"></path><path d="M12 8v13"></path><path d="M9 11h6M9.5 14h5M10 17h4"></path></svg></span><span>Implantes dentários</span></h4><div class="treatment__body"><p class="treatment__summary">Reposição de dentes ausentes com implantes, planejada a partir da avaliação da sua saúde bucal.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Implantes dentários</span></summary><p class="treatment__detail">A indicação depende da avaliação clínica e pode exigir exames complementares. O planejamento, as etapas e os prazos são conversados com você antes do início.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="implantes">Consultar disponibilidade<span class="sr-only"> para Implantes dentários</span><span aria-hidden="true"> →</span></a></div></div></div></li></ol></section><section class="treatment-group" aria-labelledby="trat-cat-3-t" id="trat-cat-3"><h3 class="treatment-group__title" id="trat-cat-3-t">Alinhamento dos dentes</h3><ol class="treatments__list"><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-ortodontia"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4"></rect><path d="M3 12h18M8 10v4M12 10v4M16 10v4"></path></svg></span><span>Tratamento ortodôntico com aparelho</span></h4><div class="treatment__body"><p class="treatment__summary">Tratamento com aparelho ortodôntico para alinhar os dentes e ajustar a mordida.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Tratamento ortodôntico com aparelho</span></summary><p class="treatment__detail">O tipo de aparelho e a duração do tratamento são definidos após a avaliação e variam de caso para caso.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="ortodontia">Consultar disponibilidade<span class="sr-only"> para Tratamento ortodôntico com aparelho</span><span aria-hidden="true"> →</span></a></div></div></div></li></ol></section><section class="treatment-group" aria-labelledby="trat-cat-4-t" id="trat-cat-4"><h3 class="treatment-group__title" id="trat-cat-4-t">Estética</h3><ol class="treatments__list"><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-clareamento"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"></path><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7Z"></path></svg></span><span>Clareamento dental</span></h4><div class="treatment__body"><p class="treatment__summary">Tratamento estético para clarear os dentes, com avaliação prévia e orientação em cada etapa.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Clareamento dental</span></summary><p class="treatment__detail">A indicação, a técnica e o número de sessões são definidos após avaliação da saúde dos seus dentes e gengivas. Os resultados variam de pessoa para pessoa e são conversados com você antes de começar.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="clareamento">Consultar disponibilidade<span class="sr-only"> para Clareamento dental</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-facetas"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><path d="M9 9h.01M15 9h.01"></path></svg></span><span>Facetas estéticas</span></h4><div class="treatment__body"><p class="treatment__summary">Procedimento estético para melhorar a cor, o formato ou o alinhamento aparente dos dentes.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Facetas estéticas</span></summary><p class="treatment__detail">A indicação, o material e a quantidade de facetas são definidos após avaliação e planejamento, respeitando as características do seu sorriso.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="facetas">Consultar disponibilidade<span class="sr-only"> para Facetas estéticas</span><span aria-hidden="true"> →</span></a></div></div></div></li><li class="treatment" data-reveal=""><div class="treatment__head"><span class="treatment__num" aria-hidden="true"></span><h4 class="treatment__title" id="trat-harmonizacao"><span class="treatment__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-4 0-7 3-7 7.5C5 16 8.5 21 12 21s7-5 7-10.5C19 6 16 3 12 3Z"></path><path d="M9.5 15.5s1 1 2.5 1 2.5-1 2.5-1M9 10.5h.01M15 10.5h.01"></path></svg></span><span>Harmonização orofacial</span></h4><div class="treatment__body"><p class="treatment__summary">Procedimentos para o equilíbrio estético e funcional da face, indicados após avaliação individual.</p><details class="treatment__more"><summary>Saber mais<span class="sr-only"> sobre Harmonização orofacial</span></summary><p class="treatment__detail">Cada procedimento é indicado com critério, respeitando suas características e expectativas. Os resultados variam de pessoa para pessoa.</p></details><div class="treatment__actions"><a class="link-arrow" href="#agendamento" data-service="harmonizacao">Consultar disponibilidade<span class="sr-only"> para Harmonização orofacial</span><span aria-hidden="true"> →</span></a></div></div></div></li></ol></section></div><!--/pr:treatments-->
         <p class="treatments__empty" data-treatments-empty hidden>A lista de tratamentos será publicada em breve. Para saber se o atendimento que você procura está disponível, <a href="#agendamento">envie sua solicitação</a>.</p>
       </div>
     </div>
@@ -244,11 +255,12 @@
       <div class="intro-video__media" data-reveal>
         <div class="video-frame" data-video-frame>
           <video class="video-frame__video" data-intro-video muted loop playsinline preload="none"
-                 width="712" height="1280" poster="assets/video/dra-evelyn-lara-apresentacao-poster.webp"
+                 width="712" height="1280" data-poster="assets/video/dra-evelyn-lara-apresentacao-poster.webp"
                  aria-label="Vídeo de apresentação: Dra. Evelyn Lara sorrindo, de jaleco branco e braços cruzados. Trilha musical, sem fala.">
             <source data-src="assets/video/dra-evelyn-lara-apresentacao.webm" type="video/webm">
             <source data-src="assets/video/dra-evelyn-lara-apresentacao.mp4" type="video/mp4">
           </video>
+          <noscript><img class="video-frame__fallback" src="assets/video/dra-evelyn-lara-apresentacao-poster.webp" width="712" height="1280" alt="Dra. Evelyn Lara sorrindo, de jaleco branco e braços cruzados"></noscript>
           <div class="video-frame__controls">
             <button class="video-btn" type="button" data-video-toggle data-on="false">
               <svg class="video-btn__icon video-btn__icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z"/></svg>
@@ -281,10 +293,10 @@
       <div class="booking__intro">
         <p class="eyebrow" data-reveal>Agendamento</p>
         <h2 class="section-title section-title--light" id="agendamento-title" data-reveal>Vamos cuidar do <em>seu sorriso?</em></h2>
-        <p class="booking__lead" data-reveal data-booking-lead>Preencha seus dados e a sua solicitação será encaminhada pelo WhatsApp ao consultório.</p>
+        <p class="booking__lead" data-reveal data-booking-lead>Preencha seus dados e a sua solicitação fica pronta para ser enviada ao consultório.</p>
         <ol class="booking__steps" data-reveal>
           <li><span>1</span>Você preenche o formulário.</li>
-          <li><span>2</span><span class="booking__step-text" data-booking-step2>Sua mensagem é aberta no WhatsApp, pronta para enviar.</span></li>
+          <li><span>2</span><span class="booking__step-text" data-booking-step2>Você envia a mensagem ao consultório pelo canal indicado.</span></li>
           <li><span>3</span>O consultório responde para confirmar data e horário.</li>
         </ol>
         <p class="booking__notice" data-reveal>
@@ -295,7 +307,7 @@
       </div>
 
       <div class="booking__card" data-reveal>
-        <form class="form" data-booking-form novalidate>
+        <form class="form" data-booking-form novalidate onsubmit="event.preventDefault()">
           <div class="form__row">
             <label class="form__label" for="f-nome">Nome completo <span class="form__req">obrigatório</span></label>
             <input class="form__input" id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="80" aria-describedby="f-nome-erro">
@@ -304,7 +316,7 @@
 
           <div class="form__row">
             <label class="form__label" for="f-telefone">Telefone ou WhatsApp <span class="form__req">obrigatório</span></label>
-            <input class="form__input" id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="(00) 00000-0000" maxlength="16" aria-describedby="f-telefone-dica f-telefone-erro">
+            <input class="form__input" id="f-telefone" name="telefone" type="tel" inputmode="tel" autocomplete="tel-national" required placeholder="(00) 00000-0000" maxlength="25" aria-describedby="f-telefone-dica f-telefone-erro">
             <p class="form__hint" id="f-telefone-dica">Com DDD. Usado apenas para o retorno sobre a sua consulta.</p>
             <p class="form__error" id="f-telefone-erro" data-error-for="telefone" hidden></p>
           </div>
@@ -312,9 +324,7 @@
           <div class="form__row">
             <label class="form__label" for="f-tipo">Tipo de atendimento <span class="form__req">obrigatório</span></label>
             <div class="form__select-wrap">
-              <select class="form__input form__select" id="f-tipo" name="tipo" required aria-describedby="f-tipo-erro" data-service-select>
-                <option value="">Selecione uma opção</option>
-              </select>
+              <!--pr:select--><select class="form__input form__select" id="f-tipo" name="tipo" required="" aria-describedby="f-tipo-erro" data-service-select=""><option value="">Selecione uma opção</option><option value="Primeira consulta / avaliação">Primeira consulta / avaliação</option><option value="Clínica geral" data-id="clinica-geral">Clínica geral</option><option value="Limpeza dentária" data-id="limpeza">Limpeza dentária</option><option value="Restaurações dentárias" data-id="restauracoes">Restaurações dentárias</option><option value="Tratamento de canal (endodontia)" data-id="endodontia">Tratamento de canal (endodontia)</option><option value="Próteses fixas e removíveis" data-id="proteses">Próteses fixas e removíveis</option><option value="Implantes dentários" data-id="implantes">Implantes dentários</option><option value="Tratamento ortodôntico com aparelho" data-id="ortodontia">Tratamento ortodôntico com aparelho</option><option value="Clareamento dental" data-id="clareamento">Clareamento dental</option><option value="Facetas estéticas" data-id="facetas">Facetas estéticas</option><option value="Harmonização orofacial" data-id="harmonizacao">Harmonização orofacial</option><option value="Outro / quero orientação">Outro assunto / quero orientação</option></select><!--/pr:select-->
             </div>
             <p class="form__error" id="f-tipo-erro" data-error-for="tipo" hidden></p>
           </div>
@@ -342,7 +352,7 @@
           <div class="form__row">
             <label class="check">
               <input type="checkbox" name="consentimento" required aria-describedby="f-consent-erro">
-              <span>Autorizo o uso do meu nome e telefone exclusivamente para o contato sobre esta solicitação de consulta, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span>
+              <span>Autorizo o uso dos dados informados neste formulário (nome, telefone, tipo de atendimento e preferências) exclusivamente para o contato sobre esta solicitação de consulta, conforme a <a href="privacidade.html">Política de Privacidade</a>.</span>
             </label>
             <p class="form__error" id="f-consent-erro" data-error-for="consentimento" hidden></p>
           </div>
@@ -353,6 +363,7 @@
           </button>
           <p class="form__status sr-only" role="status" aria-live="polite" data-form-status></p>
         </form>
+        <noscript><p class="booking__noscript">Para preparar a solicitação pelo formulário, ative o JavaScript do navegador. Você também pode falar com o consultório pelo Instagram <a href="https://www.instagram.com/dra_evilynlara/">@dra_evilynlara</a>.</p></noscript>
 
         <div class="form-success" data-form-success hidden tabindex="-1">
           <svg class="form-success__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
@@ -389,7 +400,7 @@
         <h2 class="section-title" id="duvidas-title" data-reveal>Perguntas que <em>costumamos ouvir.</em></h2>
         <p class="lead" data-reveal>Não encontrou o que procurava? <a href="#contato">Fale com o consultório.</a></p>
       </div>
-      <div class="accordion" data-faq></div>
+      <!--pr:faq--><div class="accordion" data-faq=""><details class="faq-item" data-reveal="" id="faq-1"><summary><span>Como posso agendar uma consulta?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>Preencha o formulário de agendamento nesta página e envie a mensagem gerada ao consultório. A data e o horário só ficam reservados após a confirmação.</p></div></details><details class="faq-item" data-reveal="" id="faq-2"><summary><span>Como funciona a primeira avaliação?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>É o momento de conversar sobre suas necessidades e expectativas, realizar o exame clínico e entender as opções de tratamento indicadas para o seu caso, com explicações claras sobre cada etapa.</p></div></details><details class="faq-item" data-reveal="" id="faq-3"><summary><span>Quais tratamentos estão disponíveis?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>Os tratamentos oferecidos estão descritos na seção Tratamentos. Se tiver dúvida sobre um procedimento específico, envie sua pergunta pelos canais da seção Contato.</p></div></details><details class="faq-item" data-reveal="" id="faq-4"><summary><span>Quais convênios são atendidos?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>São atendidos os convênios Bradesco Dental e Odontoprev. Ao agendar, informe o seu plano para confirmar a cobertura do atendimento.</p></div></details><details class="faq-item" data-reveal="" id="faq-5"><summary><span>Como posso obter informações sobre valores?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>Os valores dependem do planejamento definido após a avaliação individual. Para informações iniciais, entre em contato pelos canais da seção Contato.</p></div></details><details class="faq-item" data-reveal="" id="faq-6"><summary><span>Onde fica o consultório e qual o horário de atendimento?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>O consultório fica na Rua Artur Bernardes, 265, Campo Belo&nbsp;–&nbsp;MG. <a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Artur%20Bernardes%2C%20265%2C%20Campo%20Belo%20%E2%80%93%20MG%2C%20Brasil" target="_blank" rel="noopener">Ver no Google Maps</a></p><p>Horário de atendimento: Segunda a sexta-feira, 09h às 18h.</p></div></details><details class="faq-item" data-reveal="" id="faq-7"><summary><span>Como entrar em contato?</span><span class="faq-item__icon" aria-hidden="true"></span></summary><div class="faq-item__answer"><p>Pelo formulário de agendamento ou pelos canais listados na seção Contato, como o Instagram.</p></div></details></div><!--/pr:faq-->
     </div>
   </section>
 
@@ -399,10 +410,10 @@
       <div class="contact__content">
         <p class="eyebrow eyebrow--ink" data-reveal>Localização e contato</p>
         <h2 class="section-title" id="contato-title" data-reveal>Estamos prontos para <em>receber você.</em></h2>
-        <dl class="contact__list" data-contact-list></dl>
+        <!--pr:contact--><dl class="contact__list" data-contact-list=""><div class="contact__item"><dt>Endereço</dt><dd>Rua Artur Bernardes, 265, Campo Belo&nbsp;–&nbsp;MG</dd></div><div class="contact__item"><dt>Horários</dt><dd><ul><li>Segunda a sexta-feira, 09h às 18h</li></ul></dd></div><div class="contact__item"><dt>Convênios</dt><dd>Bradesco Dental&nbsp;· Odontoprev</dd></div><div class="contact__item"><dt>Instagram</dt><dd><a href="https://www.instagram.com/dra_evilynlara/" target="_blank" rel="noopener">@dra_evilynlara</a></dd></div></dl><!--/pr:contact-->
         <div class="contact__actions" data-reveal>
           <a class="btn btn--brown" href="#agendamento">Solicitar consulta</a>
-          <a class="btn btn--outline" href="#" target="_blank" rel="noopener" data-maps-link hidden>Abrir no Google Maps</a>
+          <!--pr:maps--><a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Artur%20Bernardes%2C%20265%2C%20Campo%20Belo%20%E2%80%93%20MG%2C%20Brasil" target="_blank" rel="noopener" data-maps-link="">Abrir no Google Maps</a><!--/pr:maps-->
         </div>
       </div>
       <div class="contact__map" data-map>
@@ -433,11 +444,11 @@
     </nav>
     <div>
       <h2 class="site-footer__heading">Contato</h2>
-      <ul class="site-footer__links" data-footer-contact></ul>
+      <!--pr:footer-contact--><ul class="site-footer__links" data-footer-contact=""><li><a href="https://www.google.com/maps/search/?api=1&amp;query=Rua%20Artur%20Bernardes%2C%20265%2C%20Campo%20Belo%20%E2%80%93%20MG%2C%20Brasil" target="_blank" rel="noopener">Rua Artur Bernardes, 265, Campo Belo&nbsp;–&nbsp;MG</a></li><li><span class="site-footer__hours">Segunda a sexta-feira, 09h às 18h</span></li><li><a href="https://www.instagram.com/dra_evilynlara/" target="_blank" rel="noopener">Instagram @dra_evilynlara</a></li><li><a href="#agendamento">Solicitar consulta</a></li></ul><!--/pr:footer-contact-->
     </div>
   </div>
   <div class="container site-footer__bottom">
-    <p data-footer-legal>Responsável técnica: Dra. Evelyn Lara — Cirurgiã-Dentista<span data-footer-cro></span></p>
+    <!--pr:footer-legal--><p data-footer-legal="">Dra. Evelyn Lara — Cirurgiã-Dentista<span data-qualificacao=""> · Clínica Geral</span><span data-footer-cro=""> — CRO-MG&nbsp;60043</span></p><!--/pr:footer-legal-->
     <p><a href="privacidade.html">Privacidade e tratamento de dados</a></p>
     <p>As informações deste site têm caráter informativo e não substituem a avaliação clínica individual.</p>
   </div>
@@ -449,7 +460,7 @@
 </a>
 
 <div class="draft-banner" data-draft-banner hidden role="note">
-  <strong>Pré-visualização</strong> — dados de contato, CRO e tratamentos aguardam confirmação. <button type="button" data-draft-dismiss aria-label="Ocultar aviso de pré-visualização">Ocultar</button>
+  <strong>Pré-visualização</strong><span data-draft-text> — alguns dados aguardam confirmação. </span><button type="button" data-draft-dismiss aria-label="Ocultar aviso de pré-visualização">Ocultar</button>
 </div>
 
 <dialog class="lightbox" data-lightbox aria-label="Foto ampliada">
