@@ -27,11 +27,11 @@
   <article class="container page__article">
     <p class="eyebrow eyebrow--ink">Privacidade e tratamento de dados</p>
     <h1 class="section-title">Política de Privacidade</h1>
-    <p class="draft-note" data-draft-only><strong>Texto-base para revisão.</strong> Este conteúdo é um modelo inicial e não passou por revisão jurídica. Revise-o com a profissional (e, se possível, com assessoria jurídica) antes da publicação, completando os dados do controlador.</p>
+    <p class="draft-note" data-draft-only hidden><strong>Texto-base para revisão.</strong> Este conteúdo é um modelo inicial e não passou por revisão jurídica. Revise-o com a profissional (e, se possível, com assessoria jurídica) antes da publicação, completando os dados do controlador.</p>
 
     <div class="prose page__prose">
       <h2>1. Quem é responsável pelos dados</h2>
-      <p>A responsável pelo tratamento dos dados pessoais enviados por este site é a Dra. Evelyn Lara, cirurgiã-dentista, CRO-MG&nbsp;60043, com consultório na Rua Artur Bernardes, 265, Campo Belo&nbsp;–&nbsp;MG (controladora, nos termos da Lei nº 13.709/2018 — Lei Geral de Proteção de Dados, LGPD). Contato para assuntos de privacidade: WhatsApp <a href="https://wa.me/5535992366122">(35)&nbsp;99236-6122</a> ou Instagram <a href="https://www.instagram.com/dra_evilynlara/">@dra_evilynlara</a>. <em data-draft-only>[Completar, se aplicável: CPF/CNPJ e e-mail para assuntos de privacidade.]</em></p>
+      <p>A responsável pelo tratamento dos dados pessoais enviados por este site é a Dra. Evelyn Lara, cirurgiã-dentista, CRO-MG&nbsp;60043, com consultório na Rua Artur Bernardes, 265, Campo Belo&nbsp;–&nbsp;MG (controladora, nos termos da Lei nº 13.709/2018 — Lei Geral de Proteção de Dados, LGPD). Contato para assuntos de privacidade: WhatsApp <a href="https://wa.me/5535992366122">(35)&nbsp;99236-6122</a> ou Instagram <a href="https://www.instagram.com/dra_evilynlara/">@dra_evilynlara</a>. <em data-draft-only hidden>[Completar, se aplicável: CPF/CNPJ e e-mail para assuntos de privacidade.]</em></p>
 
       <h2>2. Quais dados coletamos</h2>
       <p>O formulário de agendamento solicita apenas o necessário para responder ao seu pedido de consulta:</p>
@@ -56,13 +56,13 @@
       <p>Caso ferramentas de análise ou marketing sejam adicionadas no futuro, esta política será atualizada e um aviso com opções de consentimento será exibido antes de qualquer coleta.</p>
 
       <h2>6. Por quanto tempo os dados são mantidos</h2>
-      <p>As mensagens recebidas são mantidas apenas pelo tempo necessário para responder à solicitação e organizar o atendimento. <em data-draft-only>[Completar com o prazo e a prática adotados pelo consultório.]</em></p>
+      <p>As mensagens recebidas são mantidas apenas pelo tempo necessário para responder à solicitação e organizar o atendimento. <em data-draft-only hidden>[Completar com o prazo e a prática adotados pelo consultório.]</em></p>
 
       <h2>7. Seus direitos</h2>
       <p>Você pode, a qualquer momento, solicitar confirmação de tratamento, acesso, correção, anonimização, eliminação dos dados tratados com base no consentimento, informações sobre compartilhamento e a revogação do consentimento, entre outros direitos previstos no art. 18 da LGPD. Para isso, entre em contato pelos canais indicados na <a href="index.html#contato">seção Contato</a>, como o WhatsApp <a href="https://wa.me/5535992366122">(35)&nbsp;99236-6122</a> ou o Instagram <a href="https://www.instagram.com/dra_evilynlara/">@dra_evilynlara</a>. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
 
       <h2>8. Atualizações</h2>
-      <p>Esta política pode ser atualizada para refletir mudanças no site ou na legislação. <em data-draft-only>[Completar: data da última atualização.]</em></p>
+      <p>Esta política pode ser atualizada para refletir mudanças no site ou na legislação. <em data-draft-only hidden>[Completar: data da última atualização.]</em></p>
     </div>
 
     <a class="btn btn--brown" href="index.html#agendamento">Voltar ao agendamento</a>
@@ -77,9 +77,9 @@
 </footer>
 <script src="assets/js/config.js"></script>
 <script>
-  // no site publicado, os avisos e lacunas de rascunho não aparecem (as lacunas continuam no checklist do README)
-  if ((window.SITE_CONFIG || {}).modo === 'publicado') {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-draft-only]'), function (n) { n.hidden = true; });
+  // avisos e lacunas de rascunho ficam ocultos por padrão e só aparecem na pré-visualização (modo rascunho)
+  if ((window.SITE_CONFIG || {}).modo !== 'publicado') {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-draft-only]'), function (n) { n.hidden = false; });
   }
 </script>
 </body>

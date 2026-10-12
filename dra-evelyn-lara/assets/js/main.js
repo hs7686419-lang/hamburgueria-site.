@@ -198,7 +198,10 @@
       h('div', { class: 'treatment__head' }, [
         h('span', { class: 'treatment__num', 'aria-hidden': 'true' }),
         title,
-        h('div', { class: 'treatment__body' }, [h('p', { class: 'treatment__summary', text: t.resumo || '' }), more, h('div', { class: 'treatment__actions' }, [cta])]),
+        h('div', { class: 'treatment__body' }, [
+          t.destaque ? h('p', { class: 'treatment__highlight', text: t.destaque }) : null,
+          h('p', { class: 'treatment__summary', text: t.resumo || '' }), more, h('div', { class: 'treatment__actions' }, [cta]),
+        ]),
       ]),
     ]);
   }
@@ -260,14 +263,18 @@
 
     var espEl = clear($('[data-specialty]'));
     espEl.hidden = true;
-    if (esp && esp.titulo) {
-      if (esp.confirmado) { espEl.textContent = esp.titulo + (croText ? ' — ' + croText : ''); espEl.hidden = false; }
-      else if (isDraft) {
-        // o título não confirmado não é impresso nem na pré-visualização
-        espEl.appendChild(h('span', { class: 'badge', text: 'Pendente' }));
-        espEl.appendChild(document.createTextNode('Título de especialista aguardando confirmação no CRO. Ele não aparece no site publicado.'));
-        espEl.hidden = false;
-      }
+    if (esp && esp.titulo && esp.confirmado) {
+      espEl.textContent = esp.titulo + (croText ? ' — ' + croText : '');
+      espEl.hidden = false;
+    } else if (prof.atuacao) {
+      // área de atuação em destaque, precedida da qualificação (Código de Ética Odontológica)
+      espEl.textContent = [qualificacao, 'atuação em ' + prof.atuacao].filter(Boolean).join(' · ');
+      espEl.hidden = false;
+    } else if (isDraft && esp && esp.titulo) {
+      // o título não confirmado não é impresso nem na pré-visualização
+      espEl.appendChild(h('span', { class: 'badge', text: 'Pendente' }));
+      espEl.appendChild(document.createTextNode('Título de especialista aguardando confirmação no CRO. Ele não aparece no site publicado.'));
+      espEl.hidden = false;
     }
   });
 

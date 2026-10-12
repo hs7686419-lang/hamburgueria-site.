@@ -35,10 +35,13 @@ window.SITE_CONFIG = {
     /** UF do CRO, ex.: 'SP'. */
     croUf: 'MG',
     /**
-     * Título de especialista. Pelas normas do CFO, "especialista" só pode ser divulgado com especialidade
-     * registrada no CRO. Mantenha `confirmado: false` até a confirmação — no modo 'publicado' ele não aparece.
+     * Título de especialista: use SOMENTE com especialidade registrada no CRO, por exemplo
+     * { titulo: 'Especialista em Dentística', confirmado: true }. "Clareamento" não é especialidade
+     * reconhecida pelo CFO; por isso o destaque usa "atuação em" (campo `atuacao`, abaixo).
      */
-    especialidade: { titulo: 'Especialista em clareamento dental', confirmado: false },
+    especialidade: null,
+    /** Área de atuação em destaque, exibida como "Clínica Geral · atuação em …" na seção Sobre. */
+    atuacao: 'clareamento dental',
     /** Destaques divulgados pela profissional (exibidos na seção "Sobre"). */
     destaques: [
       { valor: '5 anos', texto: 'cuidando de sorrisos em Campo Belo' },
@@ -136,6 +139,7 @@ window.SITE_CONFIG = {
     {
       id: 'clareamento', categoria: 'Estética', icone: 'sparkle',
       nome: 'Clareamento dental',
+      destaque: 'Atuação em destaque · mais de 200 clareamentos realizados',
       resumo: 'Tratamento estético para clarear os dentes, com avaliação prévia e orientação em cada etapa.',
       detalhe: 'A indicação, a técnica e o número de sessões são definidos após avaliação da saúde dos seus dentes e gengivas. Os resultados variam de pessoa para pessoa e são conversados com você antes de começar.',
     },

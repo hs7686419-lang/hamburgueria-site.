@@ -253,7 +253,7 @@ body.menu-open { overflow: hidden; }
   position: relative; z-index: 2; display: inline-flex; flex-direction: column; margin: -2.5rem 0 0 1.25rem; padding: .9rem 1.2rem;
   background: var(--offwhite); border-radius: var(--radius-md); box-shadow: var(--shadow-md); font-size: var(--fs-xs); color: var(--ink-soft); letter-spacing: .04em;
 }
-.about__caption span:first-child { font-family: var(--font-serif); font-size: 1.25rem; color: var(--brown-800); letter-spacing: 0; }
+.about__caption > span:first-child { font-family: var(--font-serif); font-size: 1.25rem; color: var(--brown-800); letter-spacing: 0; }
 .about__cro { margin-top: .15rem; }
 .about__content > * + * { margin-top: var(--space-4); }
 .about__values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
@@ -265,7 +265,9 @@ body.menu-open { overflow: hidden; }
 .about__fact { padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--beige); border: 1px solid rgba(215, 185, 154, .5); }
 .about__fact-value { display: block; font-family: var(--font-serif); font-size: clamp(2rem, 1.6rem + 1.2vw, 2.6rem); line-height: 1; color: var(--brown-800); }
 .about__fact-text { display: block; margin-top: .35rem; font-size: var(--fs-sm); color: var(--ink-soft); line-height: 1.4; }
-.about__specialty { font-size: var(--fs-sm); color: var(--ink-soft); }
+.about__specialty { display: flex; align-items: center; gap: .6rem; font-size: var(--fs-sm); font-weight: 600; letter-spacing: .01em; color: var(--brown-700); }
+.about__specialty::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--rose-500); box-shadow: 0 0 0 4px rgba(217, 154, 154, .25); }
+.about__specialty:has(.badge)::before { display: none; }
 .about__specialty .badge { margin-right: .4rem; }
 
 /* ---------- Tratamentos ---------- */
@@ -301,6 +303,7 @@ body.menu-open { overflow: hidden; }
 .treatment:hover .treatment__icon { background: var(--brown-800); color: var(--rose-300); transform: rotate(-6deg); }
 .treatment__body { grid-column: 2; }
 .treatment__summary { color: var(--ink-soft); max-width: 52ch; }
+.treatment__highlight { display: inline-block; margin-bottom: var(--space-2); padding: .3rem .8rem; border-radius: var(--radius-pill); background: #f3dcd9; color: var(--brown-700); font-size: var(--fs-xs); font-weight: 700; letter-spacing: .02em; }
 .treatment__more { margin-top: .25rem; }
 .treatment__more summary {
   display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; cursor: pointer; list-style: none; font-weight: 600; font-size: var(--fs-sm); color: var(--rose-ink);
@@ -422,6 +425,7 @@ body.menu-open { overflow: hidden; }
 .booking__notice { display: flex; gap: .7rem; align-items: flex-start; padding: var(--space-3); border-radius: var(--radius-md); background: rgba(43, 22, 16, .25); font-size: var(--fs-sm); color: rgba(247, 240, 235, .9); max-width: 48ch; }
 .booking__notice svg { flex: none; width: 20px; height: 20px; margin-top: .15rem; color: var(--rose-300); }
 html:not(.js) [data-booking-form] { display: none; }
+.js .booking__noscript { display: none; }
 .booking__noscript { color: var(--ink-soft); }
 .booking__noscript a { color: var(--rose-ink); font-weight: 600; }
 .booking__card { background: var(--offwhite); color: var(--ink); border-radius: var(--radius-lg); padding: clamp(1.25rem, .8rem + 2vw, 2.5rem); box-shadow: var(--shadow-lg); }

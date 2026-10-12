@@ -15,6 +15,7 @@ python3 -m http.server 8000   # acesse http://localhost:8000
 - Instagram: [@dra_evilynlara](https://www.instagram.com/dra_evilynlara/)
 - Convênios: Bradesco Dental e Odontoprev
 - Destaques: 5 anos cuidando de sorrisos em Campo Belo; mais de 200 clareamentos realizados
+- Área de atuação em destaque: **clareamento dental** ("Clínica Geral · atuação em clareamento dental"). O título "especialista" não é usado porque clareamento não é especialidade reconhecida pelo CFO. Se ela tiver especialidade registrada no CRO (por exemplo, Dentística), preencha `profissional.especialidade`
 - 10 tratamentos, em 4 categorias: clínica geral, limpeza, restaurações, tratamento de canal (endodontia), próteses, implantes, tratamento ortodôntico com aparelho, clareamento, facetas e harmonização orofacial
 
 ## Antes de publicar: pendências
@@ -24,7 +25,6 @@ Campos vazios aparecem marcados no modo `rascunho` e **somem** no modo `publicad
 | Item | Onde | Situação |
 |---|---|---|
 | E-mail profissional | `contato.email` | pendente (opcional) |
-| Título "Especialista em clareamento dental" | `profissional.especialidade.confirmado` | **não publicado**. Pelas normas do CFO, "especialista" exige especialidade registrada no CRO, e não existe especialidade "clareamento" na lista do CFO (a mais próxima é Dentística). Confirmar antes de ativar |
 | CEP e bairro | `endereco.cep`, `endereco.bairro` | opcionais; melhoram o Google Maps e os dados estruturados |
 | Respostas do FAQ e texto "Sobre" | `faq`, `index.html#sobre` | revisar com a profissional |
 | Fotos do consultório | `galeria` | sem fotos, a seção não aparece no site publicado |
@@ -93,7 +93,7 @@ Integração futura: o objeto `Agendamento.preparar()` em `main.js` é o ponto �
 ## Qualidade verificada
 
 - Sem rolagem horizontal em 360, 390, 430, 768, 1024, 1440 e 1920 px; sem erros de console.
-- 112 verificações automatizadas (Playwright): menu, formulário, telefone, WhatsApp real e fluxo sem WhatsApp, Instagram, copiar mensagem, FAQ, tratamentos, carrossel, lightbox, vídeo, modos rascunho e publicado, JSON-LD, site sem JavaScript, falha do `main.js` ou do `config.js`, 404 em caminhos aninhados e `prefers-reduced-motion`.
+- 121 verificações automatizadas (Playwright): menu, formulário, telefone, WhatsApp real e fluxo sem WhatsApp, Instagram, copiar mensagem, FAQ, tratamentos, carrossel, lightbox, vídeo, modos rascunho e publicado, JSON-LD, site sem JavaScript, falha do `main.js` ou do `config.js`, 404 em caminhos aninhados e `prefers-reduced-motion`.
 - Revisão independente em 5 frentes (conformidade CFO/LGPD, acessibilidade WCAG 2.2, visual, JavaScript, performance/SEO), com cada achado verificado antes de ser corrigido.
 - Contraste AA nos pares de cor de texto principais.
 - Core Web Vitals **não foram medidos** em produção. A imagem do hero tem `preload` e `fetchpriority="high"` e as demais usam lazy loading.
