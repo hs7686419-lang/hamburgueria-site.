@@ -141,6 +141,8 @@ body.no-scroll{overflow:hidden}
   transform-origin:left;transform:scaleX(0);transition:transform 1s var(--ease) .7s;z-index:-1}
 .hero__title.is-visible .hero__swash,html:not(.js) .hero__swash{transform:scaleX(1)}
 .hero__lead{font-size:var(--fs-lead);color:var(--muted);max-width:34rem}
+/* o texto do hero fica sempre acima das cápsulas e dos chips */
+.hero__copy>*{position:relative;z-index:4}
 .hero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .hero__stats{display:flex;gap:clamp(18px,3vw,40px);list-style:none;margin:40px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
 .hero__stats li{display:flex;flex-direction:column;gap:2px}
@@ -154,7 +156,10 @@ body.no-scroll{overflow:hidden}
 .ring{position:absolute;border-radius:50%;border:1px solid rgba(18,18,18,.08);inset:-6%}
 .ring--2{inset:-14%;border-style:dashed;border-color:rgba(234,0,41,.18);animation:spin 60s linear infinite}
 .ring--3{inset:-23%;border-color:rgba(18,18,18,.05)}
-.hero__3d{position:absolute;inset:-6% -8%;z-index:1;pointer-events:none}
+.hero__3d{position:absolute;inset:-6% -8%;z-index:1;pointer-events:none;
+  /* bordas do canvas somem suavemente: nenhuma cápsula fica cortada em linha reta */
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);-webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent,#000 9%,#000 91%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 91%,transparent);mask-composite:intersect}
 .hero__3d canvas{position:absolute;inset:0;width:100%!important;height:100%!important;opacity:0;transition:opacity 1.2s var(--ease)}
 .hero__3d.is-ready canvas{opacity:1}
 .hero__bottle-wrap{position:absolute;left:50%;top:50%;width:62%;z-index:2;transform:translate(-50%,-50%);will-change:transform}
@@ -434,6 +439,7 @@ body.no-scroll{overflow:hidden}
   .hero__title{order:2;max-width:12ch;margin-bottom:4px}
   .hero__stage{order:3;max-width:min(420px,76vw);width:100%;margin:0 auto 10px}
   .hero__lead{font-size:1rem}
+  .hero__3d{inset:-2% -7%}
   .hero__lead{order:4}
   .hero__actions{order:5;margin-top:24px}
   .hero__stats{order:6}
