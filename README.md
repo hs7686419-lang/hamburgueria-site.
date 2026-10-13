@@ -10,11 +10,30 @@ python3 -m http.server 8000   # depois acesse http://localhost:8000
 
 ## Estrutura
 
-| Arquivo | Função |
-|---|---|
-| `index.html` | Página completa: header, hero, destaques, cardápio com filtros, **seção 3D "Descubra cada camada do sabor"**, produto em destaque, depoimentos, CTA final, footer e carrinho de pedido |
-| `burger3d.js` | Cena 3D, controles, rótulos e interações da seção 3D (carregado sob demanda) |
-| `vendor/three.min.js` | Three.js r149 (MIT), carregado só quando a seção 3D se aproxima da tela |
+```
+.
+├── index.html                 # Site: header, hero, destaques, cardápio, seção 3D, depoimentos, CTA, footer e carrinho
+├── css/
+│   └── style.css              # Estilos do site (tokens de cor/tipografia em :root)
+├── js/
+│   ├── main.js                # Dados (CARDAPIO, RECEITAS_3D), cardápio, carrinho (Pedido) e carregamento do 3D
+│   └── burger3d.js            # Cena 3D, controles, rótulos e interações (carregado sob demanda)
+├── vendor/
+│   ├── three.min.js           # Three.js r149 (MIT), baixado só quando a seção 3D se aproxima da tela
+│   └── three.LICENSE
+├── assets/
+│   └── img/                   # Fotos dos lanches (hero-*, thumb-*) e fundo do bar (bg-bar)
+├── design-system/
+│   ├── index.html             # Página do Design System "Burger Shop" (cores, tipografia, tokens, componentes, exemplo)
+│   ├── support.js             # Runtime gerado da página do design system (não editar)
+│   └── thumbnail.webp         # Miniatura do protótipo
+└── docs/
+    ├── design-system-burger-shop.docx   # Documento do design system
+    └── referencias/                     # Imagens de referência visual
+```
+
+- Site: `http://localhost:8000/`
+- Design System: `http://localhost:8000/design-system/`
 
 ## Experiência 3D
 
@@ -29,7 +48,7 @@ python3 -m http.server 8000   # depois acesse http://localhost:8000
 
 ## Editar ingredientes (receitas)
 
-Em `index.html`, procure por `RECEITAS_3D`. A chave é o `id` do lanche em `CARDAPIO`; `camadas` é listada **de cima para baixo**:
+Em `js/main.js`, procure por `RECEITAS_3D`. A chave é o `id` do lanche em `CARDAPIO`; `camadas` é listada **de cima para baixo**:
 
 ```js
 'classic-smash': { camadas: [
@@ -48,4 +67,4 @@ Para um lanche novo: adicione-o ao `CARDAPIO` e crie a entrada correspondente em
 
 ## Pedido
 
-`Pedido.add(id)` é o ponto de integração de todos os botões "Pedir agora". Hoje ele alimenta um carrinho simples e finaliza por WhatsApp: defina `WHATSAPP_NUMERO` (ex.: `'5511999999999'`) em `index.html`. Se já existir outro sistema de pedidos, basta reimplementar `Pedido.add`.
+`Pedido.add(id)` é o ponto de integração de todos os botões "Pedir agora". Hoje ele alimenta um carrinho simples e finaliza por WhatsApp: defina `WHATSAPP_NUMERO` (ex.: `'5511999999999'`) em `js/main.js`. Se já existir outro sistema de pedidos, basta reimplementar `Pedido.add`.
