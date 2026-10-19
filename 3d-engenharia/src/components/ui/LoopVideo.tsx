@@ -7,7 +7,8 @@ import { useReducedMotion } from 'framer-motion'
  */
 export function videoSources(src: string, webm = true) {
   const alt = src.replace(/\.mp4$/, '.webm')
-  return !webm || alt === src ? [{ src, type: 'video/mp4' as string | undefined }] : [ ? [{ src, type: undefined }] : [
+  if (!webm || alt === src) return [{ src, type: 'video/mp4' }]
+  return [
     { src: alt, type: 'video/webm' },
     { src, type: 'video/mp4' },
   ]
