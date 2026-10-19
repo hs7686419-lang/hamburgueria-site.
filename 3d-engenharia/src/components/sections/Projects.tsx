@@ -46,7 +46,7 @@ export function Projects() {
           index="03"
           eyebrow="Projetos"
           title={['Portfólio de', 'projetos.']}
-          text="Uma seleção de obras e estudos. Clique em um projeto para ver detalhes, localização e galeria de imagens."
+          text="Obras entregues pela 3D Engenharia. Clique em um projeto para ver detalhes, localização e galeria de imagens."
           align="split"
           titleId="projetos-titulo"
         />
@@ -79,7 +79,7 @@ export function Projects() {
           )}
           {hasDemo && (
             <Reveal delay={0.1}>
-              <DemoBadge label="Projetos demonstrativos — imagens ilustrativas" />
+              <DemoBadge label="Itens demonstrativos estão identificados" />
             </Reveal>
           )}
         </div>

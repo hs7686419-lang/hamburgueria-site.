@@ -55,6 +55,7 @@ export function PrivacyPage() {
             <section>
               <h2>7. Contato</h2>
               <p>Para exercer seus direitos ou tirar dúvidas, entre em contato: {contato}.</p>
+              {site.contact.address && <p className="mt-3">Endereço: {site.contact.address}.</p>}
             </section>
           </div>
           <a href="/" className="mt-16 inline-block text-sm text-white underline decoration-white/25 underline-offset-[6px] hover:decoration-metal-light">

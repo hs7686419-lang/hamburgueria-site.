@@ -1,8 +1,9 @@
-import { demoImage, type ImageRef } from './types'
+import { demoImage, projectImage, type ImageRef } from './types'
 
 /**
- * Portfólio. Os itens abaixo são DEMONSTRATIVOS (demo: true) — fotos de banco de
- * imagens, sem relação com obras da 3D Engenharia. Substitua pelas obras reais.
+ * Portfólio. Itens com `demo: true` são DEMONSTRATIVOS (fotos de banco de
+ * imagens, sem relação com obras da 3D Engenharia) — substitua pelas obras reais.
+ * Itens sem `demo` são obras reais da empresa.
  *
  * A grade assimétrica é montada automaticamente pela ordem da lista.
  */
@@ -18,13 +19,36 @@ export interface Project {
   demo?: boolean
 }
 
+const paris = (n: string, alt: string) => projectImage('residencial-paris', `paris-${n}`, alt)
+
 export const projects: Project[] = [
+  {
+    id: 'residencial-paris',
+    name: 'Residencial Paris',
+    category: 'Residencial',
+    location: 'Campo Belo - MG',
+    summary: 'Empreendimento residencial finalizado e 100% vendido na planta.',
+    description:
+      'Edifício residencial entregue pela 3D Engenharia, com todas as unidades vendidas ainda na planta. As áreas comuns reúnem hall de entrada com projeto de iluminação e marcenaria metálica, espaço gourmet com churrasqueira, área de convivência, jardim, elevador em aço inox e circulações com acabamento contemporâneo.',
+    images: [
+      paris('01', 'Fachada do Residencial Paris, edifício de cinco pavimentos com varandas envidraçadas'),
+      paris('02', 'Hall de entrada com montantes metálicos pretos, plantas e iluminação embutida'),
+      paris('03', 'Hall amplo com piso porcelanato claro e divisórias metálicas'),
+      paris('04', 'Circulação com sofá e escada de acesso aos pavimentos'),
+      paris('05', 'Escada com guarda-corpo metálico preto e corrimão'),
+      paris('06', 'Espaço gourmet com churrasqueira, parede de tijolinhos e luminárias pendentes'),
+      paris('07', 'Área de convivência coberta com sofás de madeira'),
+      paris('08', 'Jardim lateral com piso drenante e vegetação tropical'),
+      paris('09', 'Elevador com acabamento em aço inox'),
+      paris('10', 'Hall dos apartamentos com porta de madeira e escada'),
+    ],
+  },
   {
     id: 'demo-01',
     name: 'Projeto demonstrativo 01',
-    category: 'Corporativo',
-    location: 'Localização a definir',
-    summary: 'Edifício de escritórios — exemplo de card.',
+    category: 'Comercial',
+    location: 'Campo Belo - MG (exemplo)',
+    summary: 'Edifício comercial — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
     images: [
@@ -38,7 +62,7 @@ export const projects: Project[] = [
     id: 'demo-02',
     name: 'Projeto demonstrativo 02',
     category: 'Residencial',
-    location: 'Localização a definir',
+    location: 'Campo Belo - MG (exemplo)',
     summary: 'Residência contemporânea — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
@@ -51,8 +75,8 @@ export const projects: Project[] = [
   {
     id: 'demo-03',
     name: 'Projeto demonstrativo 03',
-    category: 'Corporativo',
-    location: 'Localização a definir',
+    category: 'Comercial',
+    location: 'Campo Belo - MG (exemplo)',
     summary: 'Fachada de geometria marcante — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
@@ -66,7 +90,7 @@ export const projects: Project[] = [
     id: 'demo-04',
     name: 'Projeto demonstrativo 04',
     category: 'Residencial',
-    location: 'Localização a definir',
+    location: 'Campo Belo - MG (exemplo)',
     summary: 'Edifício residencial vertical — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
@@ -76,27 +100,27 @@ export const projects: Project[] = [
   {
     id: 'demo-05',
     name: 'Projeto demonstrativo 05',
-    category: 'Industrial',
-    location: 'Localização a definir',
-    summary: 'Instalação industrial — exemplo de card.',
+    category: 'Comercial',
+    location: 'Campo Belo - MG (exemplo)',
+    summary: 'Espaço comercial — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
     images: [
-      demoImage('instalacoes-industriais', 'Tubulações e equipamentos de uma instalação industrial'),
-      demoImage('serralheria', 'Faíscas de corte metálico em ambiente industrial'),
+      demoImage('interior-corporativo', 'Interior comercial amplo e iluminado'),
+      demoImage('fachada-revestida', 'Fachada revestida com esquadrias de vidro'),
     ],
     demo: true,
   },
   {
     id: 'demo-06',
     name: 'Projeto demonstrativo 06',
-    category: 'Infraestrutura',
-    location: 'Localização a definir',
-    summary: 'Terraplenagem e infraestrutura — exemplo de card.',
+    category: 'Residencial',
+    location: 'Campo Belo - MG (exemplo)',
+    summary: 'Obra em execução — exemplo de card.',
     description:
       'Texto de exemplo. Descreva aqui o escopo da obra, os desafios técnicos, as soluções adotadas e o resultado entregue ao cliente.',
     images: [
-      demoImage('terraplenagem', 'Máquinas de terraplenagem em área aberta'),
+      demoImage('armacao-estrutura', 'Equipe trabalhando na armação de uma estrutura'),
       demoImage('canteiro-fundacao', 'Canteiro de fundação visto do alto'),
     ],
     demo: true,

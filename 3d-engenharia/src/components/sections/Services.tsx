@@ -24,13 +24,13 @@ export function Services() {
           index="02"
           eyebrow="Serviços"
           title={['Soluções de engenharia', 'do estudo à entrega.']}
-          text="Conheça as frentes de atuação da 3D Engenharia. Cada serviço pode ser detalhado e solicitado diretamente pelo formulário de orçamento."
+          text="Obras residenciais e comerciais em Campo Belo e região. Cada serviço pode ser solicitado diretamente pelo formulário de orçamento."
           align="split"
           titleId="servicos-titulo"
         />
         {hasDemo && (
           <Reveal className="mt-8">
-            <DemoBadge label="Serviços de exemplo — substitua pelos oficiais" />
+            <DemoBadge label="Itens marcados são exemplos — confirme antes de publicar" />
           </Reveal>
         )}
 
@@ -65,7 +65,10 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/[0.12] text-metal-light transition-colors duration-500 group-hover:border-metal-light/50 group-hover:bg-metal-light/10">
             <Icon className="h-5 w-5" strokeWidth={1.4} aria-hidden="true" />
           </span>
-          <span className="font-mono text-[11px] text-steel-500">{String(index + 1).padStart(2, '0')}</span>
+          <span className="flex items-center gap-3">
+            {service.demo && <DemoBadge label="Exemplo" />}
+            <span className="font-mono text-[11px] text-steel-500">{String(index + 1).padStart(2, '0')}</span>
+          </span>
         </div>
 
         <div className="relative mt-auto pt-24">

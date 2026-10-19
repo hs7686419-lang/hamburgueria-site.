@@ -1,9 +1,11 @@
 import {
+  Award,
   Building2,
   CalendarClock,
   ClipboardList,
   Compass,
   Hammer,
+  House,
   Headset,
   Layers,
   LineChart,
@@ -16,6 +18,7 @@ import type { ServiceIconName } from '@/content/services'
 import type { DifferentialIcon } from '@/content/differentials'
 
 export const serviceIcons: Record<ServiceIconName, LucideIcon> = {
+  home: House,
   blueprint: Compass,
   structure: Building2,
   management: LineChart,
@@ -25,6 +28,7 @@ export const serviceIcons: Record<ServiceIconName, LucideIcon> = {
 }
 
 export const differentialIcons: Record<DifferentialIcon, LucideIcon> = {
+  experience: Award,
   quality: Target,
   planning: Layers,
   service: Headset,

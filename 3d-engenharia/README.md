@@ -53,10 +53,20 @@ Depois de publicar, ajuste em `index.html` a imagem `og:image` (1200×630) e, se
 Campos de contato vazios simplesmente não aparecem. Nada foi inventado: **telefone, e-mail, endereço e redes sociais estão em branco** até serem preenchidos.
 
 ### Logo
-Coloque o arquivo em `public/brand/` (ex.: `logo.svg`) e defina `logo.src: '/brand/logo.svg'` em `src/config/site.ts`. Até lá, aparece uma marca provisória (monograma + "3D Engenharia").
+A logo foi **redesenhada em vetor** a partir da imagem oficial (esfera vermelha com o "3", arco azul do "D" e "ENGENHARIA"):
 
-### Fotografias
-As imagens atuais são **ilustrativas, de banco de imagens** (Unsplash, ver `public/images/demo/CREDITOS.md`) e estão identificadas no site com selos "Conteúdo demonstrativo" / "Foto ilustrativa". Para trocar, salve as fotos em `public/images/` (de preferência em WebP, larguras de 1600 e 800 px) e atualize os caminhos nos arquivos de `src/content/`. Quando todo o conteúdo for real, desligue os selos com `showDemoBadges: false` em `src/config/site.ts`.
+- `public/brand/logo.svg` — versão original (fundos claros)
+- `public/brand/logo-negativo.svg` — versão para fundos escuros (texto branco)
+- `public/favicon.svg` — símbolo
+- `src/components/ui/Logo.tsx` — a mesma logo embutida no site (cabeçalho horizontal e rodapé empilhado)
+
+Se a empresa tiver o arquivo vetorial original (AI/EPS/SVG/PDF), substitua os arquivos acima ou defina `logo.src` em `src/config/site.ts` para usar o arquivo oficial.
+
+### Obras reais
+O **Residencial Paris** (fotos do post oficial no Instagram @3dengenhariacb) está em `public/images/projetos/residencial-paris/` e é o primeiro item do portfólio; suas fotos também aparecem em "Sobre" e no serviço "Obras residenciais". Para adicionar outra obra: crie uma pasta em `public/images/projetos/`, gere as versões `-1600.webp` e `-800.webp` e cadastre-a em `src/content/projects.ts` com `projectImage(...)` (sem `demo: true`).
+
+### Fotografias demonstrativas
+As demais imagens são **ilustrativas, de banco de imagens** (Unsplash, ver `public/images/demo/CREDITOS.md`) e estão identificadas no site com selos "Conteúdo demonstrativo" / "Foto ilustrativa". Para trocar, salve as fotos em `public/images/` (de preferência em WebP, larguras de 1600 e 800 px) e atualize os caminhos nos arquivos de `src/content/`. Quando todo o conteúdo for real, desligue os selos com `showDemoBadges: false` em `src/config/site.ts`.
 
 ### Modelo 3D oficial
 Por padrão, o hero mostra um edifício **procedural** (gerado em código, sem arquivos para baixar). Para usar um modelo oficial: exporte em `.glb` (idealmente comprimido com Draco/Meshopt, até ~5 MB), salve em `public/models/` e defina `hero3d.modelUrl: '/models/edificio.glb'` (ajuste `modelScale` para a altura ficar em torno de 6–8 unidades). Se o arquivo falhar ao carregar, o site volta automaticamente para o modelo procedural.

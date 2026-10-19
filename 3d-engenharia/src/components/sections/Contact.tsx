@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
+import { AlertCircle, ArrowUpRight, CheckCircle2, Loader2, MapPin } from 'lucide-react'
 import { site, whatsappLink } from '@/config/site'
 import { services } from '@/content/services'
 import { Button } from '@/components/ui/Button'
@@ -8,6 +8,7 @@ import { Reveal, RevealTitle } from '@/components/ui/Reveal'
 import { Parallax } from '@/components/ui/Parallax'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { demoImage } from '@/content/types'
+import { socialIcons } from '@/components/ui/BrandIcons'
 import { SERVICE_EVENT } from './Services'
 
 type Field = 'nome' | 'empresa' | 'email' | 'telefone' | 'servico' | 'descricao'
@@ -136,7 +137,7 @@ export function Contact() {
           <RevealTitle id="contato-titulo" lines={['Vamos tirar seu', 'próximo projeto', 'do papel?']} className="display-2" accentLast />
           <Reveal delay={0.1}>
             <p className="mt-8 max-w-md text-lg leading-relaxed text-steel-300">
-              Conte um pouco sobre o que você precisa. A equipe da 3D Engenharia analisa cada solicitação e retorna com os próximos passos.
+              Conte um pouco sobre a sua obra residencial ou comercial. A equipe da 3D Engenharia analisa cada solicitação e retorna com os próximos passos.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
@@ -150,6 +151,45 @@ export function Contact() {
               ))}
             </ol>
           </Reveal>
+          {site.contact.address && (
+            <Reveal delay={0.22}>
+              <div className="mt-12 flex gap-4 border-t border-white/[0.07] pt-8">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-metal-light" strokeWidth={1.4} aria-hidden="true" />
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-steel-500">Onde estamos</p>
+                  <p className="mt-2 text-steel-200">{site.contact.address}</p>
+                  {site.contact.mapsUrl && (
+                    <a
+                      href={site.contact.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group mt-3 inline-flex items-center gap-1.5 text-sm text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-metal-light"
+                    >
+                      Ver no mapa
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+                      <span className="sr-only">(abre em nova aba)</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          )}
+          {site.social.instagram && (
+            <Reveal delay={0.23}>
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-8 inline-flex items-center gap-3 text-sm text-steel-300 transition-colors hover:text-white"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 transition-colors group-hover:border-metal-light/60">
+                  {socialIcons.instagram({ className: 'h-4 w-4' })}
+                </span>
+                Acompanhe as obras no Instagram <span className="text-white">@{site.social.instagram.split('/').filter(Boolean).pop()}</span>
+                <span className="sr-only">(abre em nova aba)</span>
+              </a>
+            </Reveal>
+          )}
           {wa && (
             <Reveal delay={0.24}>
               <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex items-center gap-2 text-sm text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-metal-light">

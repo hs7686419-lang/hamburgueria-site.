@@ -2,7 +2,6 @@ import { about } from '@/content/about'
 import { Reveal, RevealTitle } from '@/components/ui/Reveal'
 import { Parallax } from '@/components/ui/Parallax'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
-import { DemoBadge } from '@/components/ui/DemoBadge'
 
 export function About() {
   return (
@@ -25,6 +24,22 @@ export function About() {
               </Reveal>
             ))}
 
+            {about.facts.length > 0 && (
+              <Reveal delay={0.15}>
+                <dl className="mt-12 grid grid-cols-3 gap-4 border-t border-white/[0.07] pt-8">
+                  {about.facts.map((f) => (
+                    <div key={f.label}>
+                      <dt className="sr-only">{f.label}</dt>
+                      <dd>
+                        <span className="block text-xl font-medium tracking-[-0.03em] text-white sm:text-2xl">{f.value}</span>
+                        <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-steel-500">{f.label}</span>
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+            )}
+
             <ul className="mt-14 divide-y divide-white/[0.07] border-y border-white/[0.07]">
               {about.pillars.map((p, i) => (
                 <Reveal as="li" key={p.title} delay={0.1 + i * 0.08} className="group grid grid-cols-[3rem_1fr] gap-4 py-6">
@@ -46,18 +61,17 @@ export function About() {
               <Reveal className="col-span-12 sm:col-span-9 lg:col-span-10 lg:col-start-3" y={50}>
                 <figure className="relative">
                   <Parallax offset={50} className="aspect-[4/5] sm:aspect-[5/6]">
-                    <ResponsiveImage image={about.images.primary} sizes="(min-width:1024px) 45vw, 90vw" className="h-full w-full" imgClassName="object-[50%_88%] grayscale-[35%] contrast-[1.05]" />
+                    <ResponsiveImage image={about.images.primary} sizes="(min-width:1024px) 45vw, 90vw" className="h-full w-full" imgClassName="object-[30%_50%] grayscale-[15%]" />
                   </Parallax>
-                  <DemoBadge className="absolute left-4 top-4" label="Foto ilustrativa" />
                   <figcaption className="absolute -left-3 bottom-10 hidden origin-bottom-left -rotate-90 font-mono text-[10px] uppercase tracking-[0.24em] text-steel-500 lg:block">
-                    Fig. 01 — Planejamento
+                    Residencial Paris — Campo Belo
                   </figcaption>
                 </figure>
               </Reveal>
               <Reveal className="col-span-8 col-start-5 -mt-24 sm:col-span-6 sm:col-start-7 lg:absolute lg:-bottom-16 lg:left-0 lg:col-span-5 lg:mt-0 lg:w-[42%]" delay={0.15} y={80}>
                 <figure className="relative border-8 border-ink-950">
                   <Parallax offset={30} className="aspect-[4/5]">
-                    <ResponsiveImage image={about.images.secondary} sizes="(min-width:1024px) 22vw, 50vw" className="h-full w-full" imgClassName="grayscale-[35%]" />
+                    <ResponsiveImage image={about.images.secondary} sizes="(min-width:1024px) 22vw, 50vw" className="h-full w-full" imgClassName="grayscale-[15%]" />
                   </Parallax>
                 </figure>
               </Reveal>

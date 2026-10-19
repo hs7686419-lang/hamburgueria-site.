@@ -15,9 +15,10 @@ export function Footer({ base = '' }: { base?: string }) {
     <footer className="relative border-t border-white/[0.07] bg-ink-950">
       <div className="container-site grid gap-14 py-20 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
-          <Logo />
+          <Logo variant="stacked" />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-steel-400">
-            Engenharia que transforma projetos em realidade — com planejamento, precisão técnica e compromisso com a qualidade.
+            {site.tagline} em {site.city}. Engenharia que transforma projetos em realidade — com planejamento, precisão técnica e
+            compromisso com a qualidade.
           </p>
           {socials.length > 0 && (
             <ul className="mt-8 flex gap-3" aria-label="Redes sociais">
@@ -83,7 +84,14 @@ export function Footer({ base = '' }: { base?: string }) {
               {address && (
                 <li className="flex gap-3">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-metal-light" aria-hidden="true" />
-                  <span>{address}</span>
+                  {site.contact.mapsUrl ? (
+                    <a href={site.contact.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                      {address}
+                      <span className="sr-only"> (abre o mapa em nova aba)</span>
+                    </a>
+                  ) : (
+                    <span>{address}</span>
+                  )}
                 </li>
               )}
               {hours && (

@@ -10,12 +10,21 @@ export type SocialNetwork = 'instagram' | 'linkedin' | 'facebook' | 'youtube'
 
 export interface SiteConfig {
   name: string
-  /** Caminho da logo oficial (ex.: '/brand/logo.svg'). Vazio = marca provisória em texto. */
+  /** Complemento do nome exibido junto à marca (ex.: "Construtora"). */
+  tagline: string
+  /** Cidade/região de atuação, usada em textos e SEO. */
+  city: string
+  /**
+   * Arquivo da logo oficial (ex.: '/brand/logo-oficial.svg'). Vazio = usa a recriação
+   * vetorial embutida em src/components/ui/Logo.tsx (arquivos em public/brand/).
+   */
   logo: { src: string; srcOnLight?: string; alt: string; width: number; height: number }
   contact: {
     email: string
     phone: string
     address: string
+    /** Link para o endereço no mapa. */
+    mapsUrl: string
     hours: string
   }
   /** Número com DDI + DDD, apenas dígitos (ex.: '5511999999999'). */
@@ -43,11 +52,14 @@ export interface SiteConfig {
 
 export const site: SiteConfig = {
   name: '3D Engenharia',
+  tagline: 'Construtora',
+  city: 'Campo Belo - MG',
   logo: { src: '', alt: '3D Engenharia', width: 160, height: 40 },
   contact: {
     email: '',
     phone: '',
-    address: '',
+    address: 'R. Santos Dumont, 258 — Centro, Campo Belo - MG',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('3D Engenharia Construtora, R. Santos Dumont, 258, Centro, Campo Belo - MG'),
     hours: '',
   },
   whatsapp: {
@@ -55,7 +67,7 @@ export const site: SiteConfig = {
     message: 'Olá! Gostaria de falar com a 3D Engenharia sobre um projeto.',
   },
   social: {
-    // instagram: 'https://instagram.com/...',
+    instagram: 'https://www.instagram.com/3dengenhariacb/',
     // linkedin: 'https://linkedin.com/company/...',
   },
   form: {

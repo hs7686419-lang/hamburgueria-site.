@@ -2,9 +2,14 @@
  * Diferenciais — textos-base editáveis. Não inclua certificações, números ou
  * resultados que não estejam confirmados.
  */
-export type DifferentialIcon = 'quality' | 'planning' | 'service' | 'organization' | 'deadline' | 'safety'
+export type DifferentialIcon = 'experience' | 'quality' | 'planning' | 'service' | 'organization' | 'deadline' | 'safety'
 
 export const differentials: { title: string; text: string; icon: DifferentialIcon }[] = [
+  {
+    title: 'Experiência local',
+    text: 'Mais de dez anos de atuação em Campo Belo e região, com reputação construída na seriedade e na qualidade das entregas.',
+    icon: 'experience',
+  },
   {
     title: 'Qualidade técnica',
     text: 'Projetos e execução conduzidos com rigor técnico, revisão criteriosa e atenção a cada detalhe.',
@@ -19,11 +24,6 @@ export const differentials: { title: string; text: string; icon: DifferentialIco
     title: 'Atendimento',
     text: 'Comunicação direta e transparente, com acompanhamento próximo das necessidades do cliente.',
     icon: 'service',
-  },
-  {
-    title: 'Organização',
-    text: 'Processos, documentação e canteiro organizados para garantir previsibilidade em cada fase.',
-    icon: 'organization',
   },
   {
     title: 'Compromisso com prazos',

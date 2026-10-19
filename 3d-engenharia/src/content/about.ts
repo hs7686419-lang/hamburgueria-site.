@@ -1,16 +1,23 @@
-import { demoImage, type ImageRef } from './types'
+import { projectImage, type ImageRef } from './types'
 
-// Seção "Sobre" — o texto é uma sugestão inicial. Substitua pela história oficial,
-// área de atuação, diferenciais e equipe da empresa.
+// Seção "Sobre". Fatos confirmados: construtora de engenharia civil em
+// Campo Belo - MG, com mais de dez anos de atuação, focada em obras
+// residenciais e comerciais. Complete com a história oficial e a equipe.
 export const about = {
   eyebrow: 'Sobre a 3D Engenharia',
   title: ['Precisão técnica.', 'Visão de futuro.'],
   lead:
-    'A 3D Engenharia tem como proposta desenvolver soluções de engenharia com foco em planejamento, qualidade e eficiência. Cada projeto deve ser conduzido com atenção aos detalhes, responsabilidade técnica e compromisso com os objetivos do cliente.',
+    'A 3D Engenharia é uma construtora de engenharia civil sediada no centro de Campo Belo - MG. Com mais de dez anos de atuação, construiu uma sólida reputação na região pela seriedade e pela qualidade na entrega de projetos residenciais e comerciais.',
   /** Parágrafos adicionais (história, área de atuação, equipe). Deixe vazio para ocultar. */
   paragraphs: [
-    'Espaço reservado para a história oficial da empresa: como começou, onde atua e quais tipos de projeto conduz.',
+    'Cada obra é conduzida com planejamento, atenção aos detalhes e responsabilidade técnica — do primeiro estudo à entrega das chaves.',
   ] as string[],
+  /** Fatos em destaque (somente informações confirmadas). */
+  facts: [
+    { value: '10+', label: 'anos de atuação' },
+    { value: 'Residencial', label: 'e comercial' },
+    { value: 'Campo Belo', label: 'MG e região' },
+  ],
   /** Pilares — vêm do próprio texto institucional; ajuste conforme a empresa. */
   pillars: [
     { title: 'Planejamento', text: 'Cada etapa pensada antes de começar, com escopo, cronograma e recursos definidos.' },
@@ -18,8 +25,8 @@ export const about = {
     { title: 'Eficiência', text: 'Decisões orientadas aos objetivos do cliente, sem desperdício de tempo e recursos.' },
   ],
   images: {
-    primary: demoImage('planta-desenho', 'Profissional desenhando uma planta técnica sobre a prancheta'),
-    secondary: demoImage('armacao-estrutura', 'Equipe trabalhando na armação de uma estrutura em altura'),
+    primary: projectImage('residencial-paris', 'paris-01', 'Fachada do Residencial Paris, obra da 3D Engenharia em Campo Belo - MG'),
+    secondary: projectImage('residencial-paris', 'paris-02', 'Hall de entrada do Residencial Paris'),
   } satisfies Record<string, ImageRef>,
   /** Equipe — preencha quando houver dados oficiais. Lista vazia = bloco oculto. */
   team: [] as { name: string; role: string; photo?: ImageRef }[],

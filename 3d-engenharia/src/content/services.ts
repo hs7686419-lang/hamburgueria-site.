@@ -1,13 +1,13 @@
-import { demoImage, type ImageRef } from './types'
+import { demoImage, projectImage, type ImageRef } from './types'
 
 /**
- * Serviços — cadastre aqui os serviços que a 3D Engenharia realmente oferece.
- * Os itens abaixo são EXEMPLOS de estrutura (demo: true) e não afirmam que a
- * empresa executa essas atividades.
+ * Serviços. Confirmados: construção residencial e comercial.
+ * Os itens com `demo: true` são EXEMPLOS de estrutura e aparecem com selo —
+ * confirme, edite ou remova antes de publicar.
  *
  * icon: nome de um ícone do mapa em src/components/ui/ServiceIcon.tsx
  */
-export type ServiceIconName = 'blueprint' | 'structure' | 'management' | 'consulting' | 'installations' | 'renovation'
+export type ServiceIconName = 'home' | 'blueprint' | 'structure' | 'management' | 'consulting' | 'installations' | 'renovation'
 
 export interface Service {
   id: string
@@ -22,19 +22,27 @@ export interface Service {
 
 export const services: Service[] = [
   {
+    id: 'residencial',
+    title: 'Obras residenciais',
+    description:
+      'Construção de residências com planejamento, acompanhamento técnico e cuidado com o acabamento em cada etapa da obra.',
+    icon: 'home',
+    image: projectImage('residencial-paris', 'paris-06', 'Espaço gourmet do Residencial Paris'),
+  },
+  {
+    id: 'comercial',
+    title: 'Obras comerciais',
+    description:
+      'Execução de edificações comerciais com organização de canteiro, controle de prazos e responsabilidade técnica.',
+    icon: 'structure',
+    image: demoImage('edificios-corporativos', 'Edifícios comerciais envidraçados'),
+  },
+  {
     id: 'projetos',
     title: 'Projetos de engenharia',
     description: 'Descrição do serviço: escopo, entregáveis e como o trabalho é conduzido. Substitua por um texto oficial.',
     icon: 'blueprint',
     image: demoImage('planta-desenho', 'Mãos desenhando uma planta técnica com régua e lápis'),
-    demo: true,
-  },
-  {
-    id: 'execucao',
-    title: 'Execução de obras',
-    description: 'Descrição do serviço: etapas, acompanhamento técnico e padrões de qualidade adotados.',
-    icon: 'structure',
-    image: demoImage('equipe-obra', 'Vista aérea de equipe trabalhando sobre laje em construção'),
     demo: true,
   },
   {
@@ -51,14 +59,6 @@ export const services: Service[] = [
     description: 'Descrição do serviço: análises, pareceres e apoio à tomada de decisão em cada fase do projeto.',
     icon: 'consulting',
     image: demoImage('reuniao-tecnica', 'Reunião técnica com notebook e anotações sobre a mesa'),
-    demo: true,
-  },
-  {
-    id: 'instalacoes',
-    title: 'Instalações',
-    description: 'Descrição do serviço: sistemas, compatibilização e acompanhamento da execução.',
-    icon: 'installations',
-    image: demoImage('instalacoes-industriais', 'Tubulações e equipamentos de uma instalação industrial'),
     demo: true,
   },
   {
