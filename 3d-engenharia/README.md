@@ -33,8 +33,8 @@ Configure as variáveis de ambiente no painel da hospedagem (ou em `.env`, veja 
 
 | Variável | Para quê |
 |---|---|
-| `VITE_FORM_ENDPOINT` | URL que recebe o formulário via POST JSON (Formspree, Getform, API própria). Sem ela, o formulário **não envia** e avisa o visitante. |
-| `VITE_WHATSAPP_NUMBER` | Número oficial com DDI+DDD, só dígitos (ex.: `5511999999999`). Sem ele, o botão flutuante não aparece em produção. |
+| `VITE_FORM_ENDPOINT` | Opcional. URL que recebe o formulário via POST JSON (Formspree, Getform, API própria). **Sem ela, o formulário de orçamento abre o WhatsApp da empresa com a mensagem já preenchida** (nome, serviço, descrição etc.) para o cliente só tocar em enviar. |
+| `VITE_WHATSAPP_NUMBER` | Opcional. O número oficial (35) 99776-0368 já está em `src/config/site.ts`; use só para sobrescrevê-lo. |
 
 Depois de publicar, ajuste em `index.html` a imagem `og:image` (1200×630) e, se quiser, descomente o `Sitemap` em `public/robots.txt`.
 

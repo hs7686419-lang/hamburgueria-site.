@@ -29,12 +29,16 @@ export function PrivacyPage() {
             <section>
               <h2>2. Para que usamos</h2>
               <p>Os dados são usados exclusivamente para responder à sua solicitação, elaborar propostas e manter o contato comercial relacionado a ela.</p>
+              <p className="mt-3">
+                Ao solicitar um orçamento, o formulário abre o WhatsApp com a sua mensagem já preenchida; os dados só são enviados quando você
+                confirma o envio no próprio WhatsApp. O site não armazena essas informações.
+              </p>
             </section>
             <section>
               <h2>3. Compartilhamento</h2>
               <p>
                 Não vendemos nem cedemos seus dados. Eles podem ser processados por fornecedores de tecnologia necessários ao funcionamento do
-                site (hospedagem e serviço de envio de formulários), que atuam conforme nossas instruções.
+                site e ao atendimento (hospedagem e WhatsApp), conforme as políticas de cada serviço.
               </p>
             </section>
             <section>

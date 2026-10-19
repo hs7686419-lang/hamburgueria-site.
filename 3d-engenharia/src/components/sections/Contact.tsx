@@ -14,7 +14,17 @@ import { SERVICE_EVENT } from './Services'
 type Field = 'nome' | 'empresa' | 'email' | 'telefone' | 'servico' | 'descricao'
 type Values = Record<Field, string>
 type Errors = Partial<Record<Field, string>>
-type Status = { kind: 'idle' } | { kind: 'sending' } | { kind: 'success' } | { kind: 'error'; message: string }
+type Status = { kind: 'idle' } | { kind: 'sending' } | { kind: 'success'; message: string } | { kind: 'error'; message: string }
+
+/**
+ * Como o pedido de orçamento é entregue:
+ * - 'endpoint': POST para site.form.endpoint (Formspree, API própria…)
+ * - 'whatsapp': abre o WhatsApp da empresa com a mensagem já preenchida
+ *   (padrão enquanto não houver endpoint configurado)
+ */
+const MODE: 'endpoint' | 'whatsapp' | 'none' = site.form.endpoint ? 'endpoint' : whatsappLink() ? 'whatsapp' : 'none'
+/** No WhatsApp a empresa já recebe o número do cliente; e-mail e telefone ficam opcionais. */
+const CONTACT_REQUIRED = MODE !== 'whatsapp'
 
 const initial: Values = { nome: '', empresa: '', email: '', telefone: '', servico: '', descricao: '' }
 const OTHER = 'Outro / ainda não sei'
@@ -22,12 +32,30 @@ const OTHER = 'Outro / ainda não sei'
 function validate(v: Values): Errors {
   const e: Errors = {}
   if (v.nome.trim().length < 2) e.nome = 'Informe seu nome.'
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email.trim())) e.email = 'Informe um e-mail válido.'
+  const email = v.email.trim()
+  if ((CONTACT_REQUIRED || email) && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) e.email = 'Informe um e-mail válido.'
   const digits = v.telefone.replace(/\D/g, '')
-  if (digits.length < 10 || digits.length > 13) e.telefone = 'Informe um telefone com DDD.'
+  if ((CONTACT_REQUIRED || digits) && (digits.length < 10 || digits.length > 13)) e.telefone = 'Informe um telefone com DDD.'
   if (!v.servico) e.servico = 'Selecione o tipo de serviço.'
   if (v.descricao.trim().length < 20) e.descricao = 'Descreva o projeto em pelo menos 20 caracteres.'
   return e
+}
+
+/** Monta a mensagem de orçamento enviada pelo WhatsApp. */
+function whatsappMessage(v: Values) {
+  const lines = [
+    'Olá! Vim pelo site e gostaria de solicitar um orçamento.',
+    '',
+    `*Nome:* ${v.nome.trim()}`,
+    v.empresa.trim() ? `*Empresa:* ${v.empresa.trim()}` : null,
+    v.email.trim() ? `*E-mail:* ${v.email.trim()}` : null,
+    v.telefone.trim() ? `*Telefone:* ${v.telefone.trim()}` : null,
+    `*Serviço:* ${v.servico}`,
+    '',
+    '*Sobre o projeto:*',
+    v.descricao.trim(),
+  ]
+  return lines.filter((l) => l !== null).join('\n')
 }
 
 /** Máscara brasileira simples: (11) 98765-4321 */
@@ -79,13 +107,25 @@ export function Contact() {
       return
     }
 
+    // Pedido pelo WhatsApp: abre a conversa com a mensagem pronta (o envio é feito pelo cliente)
+    if (MODE === 'whatsapp') {
+      const url = whatsappLink(whatsappMessage(values))!
+      // Sem a flag 'noopener' (com ela window.open sempre retorna null); a referência é cortada logo abaixo
+      const win = window.open(url, '_blank')
+      if (win) win.opener = null
+      else window.location.href = url // bloqueador de pop-up: abre na mesma aba
+      setStatus({
+        kind: 'success',
+        message: 'Abrimos o WhatsApp com o seu pedido de orçamento já escrito. É só tocar em enviar para falar com a nossa equipe.',
+      })
+      return
+    }
+
     // Sem integração configurada: NÃO simula envio.
-    if (!site.form.endpoint) {
+    if (MODE === 'none') {
       setStatus({
         kind: 'error',
-        message:
-          'O envio de formulários ainda não foi configurado neste site, por isso sua mensagem não foi enviada. ' +
-          (whatsappLink() ? 'Fale conosco pelo WhatsApp enquanto isso.' : 'Tente novamente mais tarde.'),
+        message: 'O envio de formulários ainda não foi configurado neste site, por isso sua mensagem não foi enviada. Tente novamente mais tarde.',
       })
       return
     }
@@ -98,7 +138,7 @@ export function Contact() {
         body: JSON.stringify({ ...values, origem: 'site', enviadoEm: new Date().toISOString() }),
       })
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
-      setStatus({ kind: 'success' })
+      setStatus({ kind: 'success', message: 'Mensagem enviada com sucesso! Em breve entraremos em contato.' })
       setValues(initial)
       setTouched({})
     } catch (err) {
@@ -251,10 +291,10 @@ export function Contact() {
               <FormField label="Empresa (opcional)" htmlFor={`${uid}-empresa`}>
                 <input {...fieldProps('empresa')} type="text" autoComplete="organization" className="field" placeholder="Nome da empresa" onChange={(e) => set('empresa', e.target.value)} />
               </FormField>
-              <FormField label="E-mail *" htmlFor={`${uid}-email`} error={touched.email ? errors.email : undefined} errorId={`${uid}-email-erro`}>
+              <FormField label={CONTACT_REQUIRED ? 'E-mail *' : 'E-mail (opcional)'} htmlFor={`${uid}-email`} error={touched.email ? errors.email : undefined} errorId={`${uid}-email-erro`}>
                 <input {...fieldProps('email')} type="email" autoComplete="email" inputMode="email" className="field" placeholder="voce@email.com" onChange={(e) => set('email', e.target.value)} />
               </FormField>
-              <FormField label="Telefone *" htmlFor={`${uid}-telefone`} error={touched.telefone ? errors.telefone : undefined} errorId={`${uid}-telefone-erro`}>
+              <FormField label={CONTACT_REQUIRED ? 'Telefone *' : 'Telefone (opcional)'} htmlFor={`${uid}-telefone`} error={touched.telefone ? errors.telefone : undefined} errorId={`${uid}-telefone-erro`}>
                 <input {...fieldProps('telefone')} type="tel" autoComplete="tel" inputMode="tel" className="field" placeholder="(00) 00000-0000" onChange={(e) => set('telefone', e.target.value)} />
               </FormField>
               <FormField className="sm:col-span-2" label="Tipo de serviço *" htmlFor={`${uid}-servico`} error={touched.servico ? errors.servico : undefined} errorId={`${uid}-servico-erro`}>
@@ -276,16 +316,22 @@ export function Contact() {
 
             <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <p className="max-w-xs text-xs leading-relaxed text-steel-500">
-                Ao enviar, você concorda com o uso dos dados para retorno do contato, conforme a{' '}
+                {MODE === 'whatsapp'
+                  ? 'Ao continuar, o WhatsApp abre com o seu pedido pronto para envio. Os dados são usados apenas para o orçamento, conforme a '
+                  : 'Ao enviar, você concorda com o uso dos dados para retorno do contato, conforme a '}
                 <a href="/privacidade/" className="text-steel-300 underline decoration-white/20 underline-offset-4 hover:text-white">
                   política de privacidade
                 </a>
                 .
               </p>
-              <Button type="submit" disabled={status.kind === 'sending'} arrow={status.kind !== 'sending'} className="w-full sm:w-auto">
+              <Button type="submit" disabled={status.kind === 'sending'} arrow={status.kind !== 'sending' && MODE !== 'whatsapp'} className="w-full sm:w-auto">
                 {status.kind === 'sending' ? (
                   <span className="inline-flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> Enviando…
+                  </span>
+                ) : MODE === 'whatsapp' ? (
+                  <span className="inline-flex items-center gap-2">
+                    <WhatsAppIcon className="h-4 w-4 text-[#1f9d55]" /> Solicitar orçamento pelo WhatsApp
                   </span>
                 ) : (
                   'Enviar solicitação'
@@ -310,9 +356,7 @@ export function Contact() {
                       <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-300" aria-hidden="true" />
                     )}
                     <p>
-                      {status.kind === 'success'
-                        ? 'Mensagem enviada com sucesso! Em breve entraremos em contato.'
-                        : status.message}
+                      {status.message}
                     </p>
                   </motion.div>
                 )}
