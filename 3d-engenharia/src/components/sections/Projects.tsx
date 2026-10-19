@@ -16,12 +16,13 @@ const ease = [0.22, 1, 0.36, 1] as const
  * sem vazios (7×2 + 5×3 / 7×3 + 5×2, espelhado no bloco seguinte). O último
  * bloco incompleto é redistribuído para não deixar buracos.
  */
-const BLOCK_A = ['lg:col-span-7 lg:row-span-2', 'lg:col-span-5 lg:row-span-3', 'lg:col-span-7 lg:row-span-3', 'lg:col-span-5 lg:row-span-2']
-const BLOCK_B = ['lg:col-span-5 lg:row-span-3', 'lg:col-span-7 lg:row-span-2', 'lg:col-span-5 lg:row-span-2', 'lg:col-span-7 lg:row-span-3']
+// Colunas iniciais explícitas + grid-flow-dense garantem o encaixe sem vazios
+const BLOCK_A = ['lg:col-start-1 lg:col-span-7 lg:row-span-2', 'lg:col-start-8 lg:col-span-5 lg:row-span-3', 'lg:col-start-1 lg:col-span-7 lg:row-span-3', 'lg:col-start-8 lg:col-span-5 lg:row-span-2']
+const BLOCK_B = ['lg:col-start-1 lg:col-span-5 lg:row-span-3', 'lg:col-start-6 lg:col-span-7 lg:row-span-2', 'lg:col-start-1 lg:col-span-5 lg:row-span-2', 'lg:col-start-6 lg:col-span-7 lg:row-span-3']
 const TAIL: Record<number, string[]> = {
   1: ['lg:col-span-12 lg:row-span-3'],
-  2: ['lg:col-span-6 lg:row-span-3', 'lg:col-span-6 lg:row-span-3'],
-  3: ['lg:col-span-4 lg:row-span-3', 'lg:col-span-4 lg:row-span-3', 'lg:col-span-4 lg:row-span-3'],
+  2: ['lg:col-start-1 lg:col-span-6 lg:row-span-3', 'lg:col-start-7 lg:col-span-6 lg:row-span-3'],
+  3: ['lg:col-start-1 lg:col-span-4 lg:row-span-3', 'lg:col-start-5 lg:col-span-4 lg:row-span-3', 'lg:col-start-9 lg:col-span-4 lg:row-span-3'],
 }
 function spanFor(i: number, total: number) {
   const block = Math.floor(i / 4)
@@ -84,7 +85,7 @@ export function Projects() {
           )}
         </div>
 
-        <motion.ul layout={!reduce} className="mt-10 grid gap-4 sm:grid-cols-2 lg:auto-rows-[150px] lg:grid-cols-12 lg:gap-5 xl:auto-rows-[170px]">
+        <motion.ul layout={!reduce} className="mt-10 grid gap-4 lg:grid-flow-dense sm:grid-cols-2 lg:auto-rows-[150px] lg:grid-cols-12 lg:gap-5 xl:auto-rows-[170px]">
           <AnimatePresence mode="popLayout" initial={false}>
             {list.map((p, i) => (
               <motion.li
