@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { AlertCircle, ArrowUpRight, CheckCircle2, Loader2, MapPin } from 'lucide-react'
+import { AlertCircle, ArrowUpRight, CheckCircle2, Loader2, Mail, MapPin, Phone } from 'lucide-react'
 import { site, whatsappLink } from '@/config/site'
 import { services } from '@/content/services'
 import { Button } from '@/components/ui/Button'
@@ -8,7 +8,7 @@ import { Reveal, RevealTitle } from '@/components/ui/Reveal'
 import { Parallax } from '@/components/ui/Parallax'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { demoImage } from '@/content/types'
-import { socialIcons } from '@/components/ui/BrandIcons'
+import { socialIcons, WhatsAppIcon } from '@/components/ui/BrandIcons'
 import { SERVICE_EVENT } from './Services'
 
 type Field = 'nome' | 'empresa' | 'email' | 'telefone' | 'servico' | 'descricao'
@@ -190,11 +190,51 @@ export function Contact() {
               </a>
             </Reveal>
           )}
-          {wa && (
+          {(wa || site.contact.phone || site.contact.email) && (
             <Reveal delay={0.24}>
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex items-center gap-2 text-sm text-white underline decoration-white/25 underline-offset-[6px] transition-colors hover:decoration-metal-light">
-                Prefere conversar? Fale pelo WhatsApp
-              </a>
+              <div className="mt-10 border-t border-white/[0.07] pt-8">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-steel-500">Prefere conversar?</p>
+                {site.contact.phone && (
+                  <a
+                    href={`tel:+55${site.contact.phone.replace(/\D/g, '')}`}
+                    className="mt-2 block text-2xl font-medium tracking-[-0.02em] text-white transition-colors hover:text-metal-light"
+                  >
+                    {site.contact.phone}
+                  </a>
+                )}
+                {site.contact.email && (
+                  <a
+                    href={`mailto:${site.contact.email}`}
+                    className="mt-2 inline-flex items-center gap-2 break-all text-sm text-steel-300 underline decoration-white/20 underline-offset-[6px] transition-colors hover:text-white hover:decoration-metal-light"
+                  >
+                    <Mail className="h-4 w-4 shrink-0 text-metal-light" aria-hidden="true" />
+                    {site.contact.email}
+                  </a>
+                )}
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {wa && (
+                    <a
+                      href={wa}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-11 items-center gap-2 rounded-full bg-[#1f9d55] px-5 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.03]"
+                    >
+                      <WhatsAppIcon className="h-4 w-4" />
+                      Conversar no WhatsApp
+                      <span className="sr-only">(abre em nova aba)</span>
+                    </a>
+                  )}
+                  {site.contact.phone && (
+                    <a
+                      href={`tel:+55${site.contact.phone.replace(/\D/g, '')}`}
+                      className="inline-flex h-11 items-center gap-2 rounded-full border border-white/20 px-5 text-sm text-white transition-colors hover:border-metal-light/60 hover:bg-white/5"
+                    >
+                      <Phone className="h-4 w-4" aria-hidden="true" />
+                      Ligar
+                    </a>
+                  )}
+                </div>
+              </div>
             </Reveal>
           )}
         </div>

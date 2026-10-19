@@ -56,14 +56,14 @@ export const site: SiteConfig = {
   city: 'Campo Belo - MG',
   logo: { src: '', alt: '3D Engenharia', width: 160, height: 40 },
   contact: {
-    email: '',
-    phone: '',
+    email: 'tresdengenharia@yahoo.com.br',
+    phone: '(35) 99776-0368',
     address: 'R. Santos Dumont, 258 — Centro, Campo Belo - MG',
     mapsUrl: 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('3D Engenharia Construtora, R. Santos Dumont, 258, Centro, Campo Belo - MG'),
     hours: '',
   },
   whatsapp: {
-    number: import.meta.env.VITE_WHATSAPP_NUMBER ?? '',
+    number: import.meta.env.VITE_WHATSAPP_NUMBER || '5535997760368',
     message: 'Olá! Gostaria de falar com a 3D Engenharia sobre um projeto.',
   },
   social: {

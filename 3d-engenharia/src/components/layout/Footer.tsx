@@ -1,7 +1,7 @@
 import { Mail, MapPin, Phone, Clock } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
 import { navItems, site, whatsappLink, type SocialNetwork } from '@/config/site'
-import { socialIcons, socialLabels } from '@/components/ui/BrandIcons'
+import { socialIcons, socialLabels, WhatsAppIcon } from '@/components/ui/BrandIcons'
 import { onAnchorClick } from '@/lib/scroll'
 
 export function Footer({ base = '' }: { base?: string }) {
@@ -72,12 +72,12 @@ export function Footer({ base = '' }: { base?: string }) {
               {phone && (
                 <li className="flex gap-3">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-metal-light" aria-hidden="true" />
-                  <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className="hover:text-white">{phone}</a>
+                  <a href={`tel:+55${phone.replace(/\D/g, '')}`} className="hover:text-white">{phone}</a>
                 </li>
               )}
               {wa && (
                 <li className="flex gap-3">
-                  <Phone className="mt-0.5 h-4 w-4 shrink-0 text-metal-light" aria-hidden="true" />
+                  <WhatsAppIcon className="mt-0.5 h-4 w-4 shrink-0 text-metal-light" />
                   <a href={wa} target="_blank" rel="noopener noreferrer" className="hover:text-white">WhatsApp</a>
                 </li>
               )}
