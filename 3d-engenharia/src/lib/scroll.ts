@@ -33,11 +33,15 @@ export function onAnchorClick(e: MouseEvent<HTMLAnchorElement>) {
   scrollToHash(href)
 }
 
-/** Trava/destrava a rolagem da página (modais, menu). */
+let locks = 0
+
+/** Trava/destrava a rolagem da página (modais, menu). Aceita travas aninhadas. */
 export function setScrollLocked(locked: boolean) {
+  locks = Math.max(0, locks + (locked ? 1 : -1))
+  const on = locks > 0
   if (lenis) {
-    if (locked) lenis.stop()
+    if (on) lenis.stop()
     else lenis.start()
   }
-  document.documentElement.style.overflow = locked ? 'hidden' : ''
+  document.documentElement.style.overflow = on ? 'hidden' : ''
 }

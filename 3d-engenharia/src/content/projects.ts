@@ -13,6 +13,10 @@ export interface Project {
   category: string
   location: string
   year?: string
+  /** Situação da obra (ex.: "Entregue", "Em execução"). */
+  status?: string
+  /** Vídeo da obra (abre no player a partir dos detalhes). */
+  video?: { src: string; poster?: string; title: string }
   summary: string
   description: string
   images: ImageRef[]
@@ -27,6 +31,7 @@ export const projects: Project[] = [
     name: 'Residencial Paris',
     category: 'Residencial',
     location: 'Campo Belo - MG',
+    status: 'Entregue',
     summary: 'Empreendimento residencial finalizado e 100% vendido na planta.',
     description:
       'Edifício residencial entregue pela 3D Engenharia, com todas as unidades vendidas ainda na planta. As áreas comuns reúnem hall de entrada com projeto de iluminação e marcenaria metálica, espaço gourmet com churrasqueira, área de convivência, jardim, elevador em aço inox e circulações com acabamento contemporâneo.',
@@ -42,6 +47,24 @@ export const projects: Project[] = [
       paris('09', 'Elevador com acabamento em aço inox'),
       paris('10', 'Hall dos apartamentos com porta de madeira e escada'),
     ],
+    video: { src: '/videos/residencial-paris.mp4', poster: '/videos/residencial-paris-poster.webp', title: 'Tour pelo Residencial Paris' },
+  },
+  {
+    id: 'residencial-alamedas',
+    name: 'Residencial Alamedas',
+    category: 'Residencial',
+    location: 'Campo Belo - MG',
+    status: 'Em execução',
+    summary: 'Condomínio residencial de apartamentos em construção.',
+    description:
+      'Condomínio residencial com blocos de apartamentos em três pavimentos, executado pela 3D Engenharia em alvenaria estrutural. A obra está em andamento — assista ao vídeo para acompanhar a evolução e conhecer o projeto.',
+    images: [
+      projectImage('residencial-alamedas', 'alamedas-01', 'Vista aérea dos blocos do Residencial Alamedas em construção'),
+      projectImage('residencial-alamedas', 'alamedas-02', 'Blocos em alvenaria estrutural vistos de drone'),
+      projectImage('residencial-alamedas', 'alamedas-03', 'Detalhe da alvenaria estrutural de um dos blocos'),
+      projectImage('residencial-alamedas', 'alamedas-04', 'Perspectiva ilustrativa do Residencial Alamedas concluído'),
+    ],
+    video: { src: '/videos/residencial-alamedas.mp4', poster: '/videos/residencial-alamedas-poster.webp', title: 'Residencial Alamedas — obra em execução' },
   },
   {
     id: 'demo-01',

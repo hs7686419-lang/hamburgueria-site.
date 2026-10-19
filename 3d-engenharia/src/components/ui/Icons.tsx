@@ -1,15 +1,11 @@
 import {
   Award,
-  Building2,
   CalendarClock,
   ClipboardList,
-  Compass,
-  Hammer,
-  House,
+  HardHat,
+  KeyRound,
   Headset,
   Layers,
-  LineChart,
-  PlugZap,
   ShieldCheck,
   Target,
   type LucideIcon,
@@ -18,13 +14,9 @@ import type { ServiceIconName } from '@/content/services'
 import type { DifferentialIcon } from '@/content/differentials'
 
 export const serviceIcons: Record<ServiceIconName, LucideIcon> = {
-  home: House,
-  blueprint: Compass,
-  structure: Building2,
-  management: LineChart,
-  consulting: ClipboardList,
-  installations: PlugZap,
-  renovation: Hammer,
+  execution: HardHat,
+  administration: ClipboardList,
+  sales: KeyRound,
 }
 
 export const differentialIcons: Record<DifferentialIcon, LucideIcon> = {

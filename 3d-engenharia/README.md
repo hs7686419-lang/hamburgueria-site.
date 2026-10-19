@@ -62,8 +62,18 @@ A logo foi **redesenhada em vetor** a partir da imagem oficial (esfera vermelha 
 
 Se a empresa tiver o arquivo vetorial original (AI/EPS/SVG/PDF), substitua os arquivos acima ou defina `logo.src` em `src/config/site.ts` para usar o arquivo oficial.
 
+### Serviços e vídeos
+Os serviços oficiais (**Execução de obras**, **Administração de obras** e **Venda de imóveis**) estão em `src/content/services.ts`. Cada card toca no fundo um trecho curto e mudo (`public/videos/*-loop.mp4` + `.webm`), que só é baixado quando o card aparece na tela, e tem o botão "Assistir ao vídeo", que abre o vídeo completo com som (`residencial-alamedas.mp4`, `residencial-paris.mp4`). Os vídeos de obra também aparecem nos detalhes do portfólio (campo `video` em `src/content/projects.ts`).
+
+Para trocar um vídeo, use MP4 (H.264 + AAC) com `-movflags +faststart`. Para os loops, gere também a versão `.webm` (VP9) de mesmo nome, por exemplo:
+
+```bash
+ffmpeg -i bruto.mp4 -ss 5 -t 8 -vf scale=540:-2 -an -c:v libx264 -crf 28 -movflags +faststart nome-loop.mp4
+ffmpeg -i nome-loop.mp4 -c:v libvpx-vp9 -crf 38 -b:v 0 -an nome-loop.webm
+```
+
 ### Obras reais
-O **Residencial Paris** (fotos do post oficial no Instagram @3dengenhariacb) está em `public/images/projetos/residencial-paris/` e é o primeiro item do portfólio; suas fotos também aparecem em "Sobre" e no serviço "Obras residenciais". Para adicionar outra obra: crie uma pasta em `public/images/projetos/`, gere as versões `-1600.webp` e `-800.webp` e cadastre-a em `src/content/projects.ts` com `projectImage(...)` (sem `demo: true`).
+O **Residencial Alamedas** (em execução; imagens tiradas do vídeo da obra) e o **Residencial Paris** (fotos do post oficial no Instagram @3dengenhariacb) está em `public/images/projetos/residencial-paris/` e é o primeiro item do portfólio; suas fotos também aparecem em "Sobre" e no serviço "Obras residenciais". Para adicionar outra obra: crie uma pasta em `public/images/projetos/`, gere as versões `-1600.webp` e `-800.webp` e cadastre-a em `src/content/projects.ts` com `projectImage(...)` (sem `demo: true`).
 
 ### Fotografias demonstrativas
 As demais imagens são **ilustrativas, de banco de imagens** (Unsplash, ver `public/images/demo/CREDITOS.md`) e estão identificadas no site com selos "Conteúdo demonstrativo" / "Foto ilustrativa". Para trocar, salve as fotos em `public/images/` (de preferência em WebP, larguras de 1600 e 800 px) e atualize os caminhos nos arquivos de `src/content/`. Quando todo o conteúdo for real, desligue os selos com `showDemoBadges: false` em `src/config/site.ts`.

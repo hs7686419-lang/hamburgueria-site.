@@ -1,21 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react'
 import type { Project } from '@/content/projects'
 import { ResponsiveImage } from '@/components/ui/ResponsiveImage'
 import { DemoBadge } from '@/components/ui/DemoBadge'
 import { ButtonLink } from '@/components/ui/Button'
 import { scrollToHash, setScrollLocked } from '@/lib/scroll'
+import { VideoModal } from '@/components/ui/VideoModal'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 /** Modal de detalhes do projeto: galeria, ficha técnica e chamada para orçamento. */
 export function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const [index, setIndex] = useState(0)
+  const [playing, setPlaying] = useState(false)
   const dialogRef = useRef<HTMLDivElement>(null)
   const returnFocus = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
+    setPlaying(false)
     if (!project) return
     setIndex(0)
     returnFocus.current = document.activeElement as HTMLElement
@@ -32,6 +35,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
     if (!project) return
     const n = project.images.length
     const onKey = (e: KeyboardEvent) => {
+      if (playing) return // o player de vídeo trata as próprias teclas
       if (e.key === 'Escape') onClose()
       else if (e.key === 'ArrowRight' && n > 1) setIndex((i) => (i + 1) % n)
       else if (e.key === 'ArrowLeft' && n > 1) setIndex((i) => (i - 1 + n) % n)
@@ -50,9 +54,11 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [project, onClose])
+  }, [project, onClose, playing])
 
   return (
+    <>
+    <VideoModal video={playing && project?.video ? project.video : null} onClose={() => setPlaying(false)} />
     <AnimatePresence>
       {project && (
         <motion.div
@@ -142,6 +148,7 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
                 {[
                   ['Categoria', project.category],
                   ['Localização', project.location],
+                  ...(project.status ? [['Situação', project.status]] : []),
                   ...(project.year ? [['Ano', project.year]] : []),
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-6 py-3">
@@ -168,6 +175,19 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
                 </div>
               )}
 
+              {project.video && (
+                <button
+                  type="button"
+                  onClick={() => setPlaying(true)}
+                  className="mt-8 inline-flex items-center gap-3 self-start rounded-full border border-white/20 py-1.5 pl-1.5 pr-5 text-sm text-white transition-colors hover:border-metal-light/60 hover:bg-white/10"
+                >
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-ink-950">
+                    <Play className="ml-0.5 h-3.5 w-3.5 fill-current" aria-hidden="true" />
+                  </span>
+                  Assistir ao vídeo da obra
+                </button>
+              )}
+
               <div className="mt-auto pt-10">
                 <ButtonLink
                   href="#contato"
@@ -186,5 +206,6 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
         </motion.div>
       )}
     </AnimatePresence>
+    </>
   )
 }

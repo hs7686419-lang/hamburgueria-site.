@@ -137,7 +137,7 @@ export function Contact() {
           <RevealTitle id="contato-titulo" lines={['Vamos tirar seu', 'próximo projeto', 'do papel?']} className="display-2" accentLast />
           <Reveal delay={0.1}>
             <p className="mt-8 max-w-md text-lg leading-relaxed text-steel-300">
-              Conte um pouco sobre a sua obra residencial ou comercial. A equipe da 3D Engenharia analisa cada solicitação e retorna com os próximos passos.
+              Conte um pouco sobre a sua obra ou sobre o imóvel que você procura. A equipe da 3D Engenharia analisa cada solicitação e retorna com os próximos passos.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
