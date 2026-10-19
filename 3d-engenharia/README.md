@@ -1,0 +1,87 @@
+# 3D Engenharia — site institucional
+
+Site institucional premium com hero 3D interativo (edifício procedural em Three.js / React Three Fiber).
+
+**Stack:** React 18 + TypeScript + Vite · Tailwind CSS · React Three Fiber / drei (Three.js) · Framer Motion · Lenis (rolagem suave) · Lucide (ícones).
+
+## Rodar localmente
+
+Pré-requisito: Node.js 18 ou superior.
+
+```bash
+cd 3d-engenharia
+npm install
+npm run dev        # http://localhost:5173
+```
+
+Para testar a versão de produção:
+
+```bash
+npm run build      # checa tipos + gera dist/
+npm run preview    # http://localhost:4173
+```
+
+## Publicar
+
+`npm run build` gera a pasta `dist/` (site estático: `index.html`, `privacidade/index.html`, `assets/`, `images/`). Ela pode ser hospedada em qualquer serviço de arquivos estáticos:
+
+- **Vercel**: importe o repositório → *Root Directory* `3d-engenharia` → framework *Vite* (build `npm run build`, saída `dist`).
+- **Netlify**: *Base directory* `3d-engenharia`, *Build command* `npm run build`, *Publish directory* `3d-engenharia/dist`.
+- **Hospedagem tradicional (cPanel/FTP)**: envie o conteúdo de `dist/` para a pasta pública (`public_html`).
+
+Configure as variáveis de ambiente no painel da hospedagem (ou em `.env`, veja `.env.example`) **antes** do build:
+
+| Variável | Para quê |
+|---|---|
+| `VITE_FORM_ENDPOINT` | URL que recebe o formulário via POST JSON (Formspree, Getform, API própria). Sem ela, o formulário **não envia** e avisa o visitante. |
+| `VITE_WHATSAPP_NUMBER` | Número oficial com DDI+DDD, só dígitos (ex.: `5511999999999`). Sem ele, o botão flutuante não aparece em produção. |
+
+Depois de publicar, ajuste em `index.html` a imagem `og:image` (1200×630) e, se quiser, descomente o `Sitemap` em `public/robots.txt`.
+
+## Onde editar o conteúdo
+
+| O quê | Arquivo |
+|---|---|
+| Nome, logo, e-mail, telefone, endereço, horário, redes sociais, WhatsApp, endpoint do formulário, modelo 3D oficial | `src/config/site.ts` |
+| Textos da primeira tela | `src/content/hero.ts` |
+| Sobre (história, pilares, fotos, equipe) | `src/content/about.ts` |
+| Serviços (título, descrição, ícone, imagem, link) | `src/content/services.ts` |
+| Portfólio (nome, categoria, localização, ano, descrição, imagens) | `src/content/projects.ts` |
+| Diferenciais | `src/content/differentials.ts` |
+| Política de privacidade (modelo, revisar com o jurídico) | `src/components/PrivacyPage.tsx` |
+
+Campos de contato vazios simplesmente não aparecem. Nada foi inventado: **telefone, e-mail, endereço e redes sociais estão em branco** até serem preenchidos.
+
+### Logo
+Coloque o arquivo em `public/brand/` (ex.: `logo.svg`) e defina `logo.src: '/brand/logo.svg'` em `src/config/site.ts`. Até lá, aparece uma marca provisória (monograma + "3D Engenharia").
+
+### Fotografias
+As imagens atuais são **ilustrativas, de banco de imagens** (Unsplash, ver `public/images/demo/CREDITOS.md`) e estão identificadas no site com selos "Conteúdo demonstrativo" / "Foto ilustrativa". Para trocar, salve as fotos em `public/images/` (de preferência em WebP, larguras de 1600 e 800 px) e atualize os caminhos nos arquivos de `src/content/`. Quando todo o conteúdo for real, desligue os selos com `showDemoBadges: false` em `src/config/site.ts`.
+
+### Modelo 3D oficial
+Por padrão, o hero mostra um edifício **procedural** (gerado em código, sem arquivos para baixar). Para usar um modelo oficial: exporte em `.glb` (idealmente comprimido com Draco/Meshopt, até ~5 MB), salve em `public/models/` e defina `hero3d.modelUrl: '/models/edificio.glb'` (ajuste `modelScale` para a altura ficar em torno de 6–8 unidades). Se o arquivo falhar ao carregar, o site volta automaticamente para o modelo procedural.
+
+## Experiência 3D: como funciona
+
+- **Animação de entrada**: o traçado técnico é desenhado, os pavimentos sobem um a um acompanhados de um anel de "scan", as janelas acendem e a câmera recua de forma cinematográfica.
+- **Mouse**: a câmera ajusta a perspectiva (parallax); fundo, edifício e interface se movem em profundidades diferentes; as coordenadas técnicas acompanham o cursor.
+- **Arrastar**: gira o modelo dentro de limites (±35° na horizontal, pequena inclinação vertical), que volta suavemente ao repouso.
+- **Celular**: arraste horizontal gira o modelo e o vertical rola a página normalmente; sem sombras em tempo real, com resolução limitada.
+- **Teclado**: com a área 3D em foco, as setas giram o modelo.
+- **Desempenho**: o código 3D (~250 KB gzip) é carregado sob demanda; o render pausa quando o hero sai da tela; peças repetidas usam *instancing*.
+- **Alternativas**: sem WebGL, ou se a cena falhar (inclusive perda de contexto da GPU), aparece um desenho técnico em SVG; `prefers-reduced-motion` desativa animações contínuas e a introdução.
+
+## Estrutura
+
+```
+src/
+  config/site.ts          dados institucionais e integrações
+  content/                textos e listas editáveis
+  components/
+    three/                cena 3D (Scene, Building, fallback, estado compartilhado)
+    sections/             Hero, About, Services, Projects (+ modal), Differentials, Contact
+    layout/               Header, Footer, WhatsAppButton
+    ui/                   Button, Reveal, Parallax, ResponsiveImage, Logo, ícones
+  hooks/  lib/            rolagem suave, media queries, detecção de WebGL
+privacidade/index.html    página da política de privacidade
+```

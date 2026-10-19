@@ -1,3 +1,5 @@
+> **Novo:** o site institucional da **3D Engenharia** (React + TypeScript + Three.js) está em [`3d-engenharia/`](3d-engenharia/README.md). O conteúdo abaixo é o projeto anterior (hamburgueria), mantido sem alterações.
+
 # Brasa & Massa — landing page + hambúrguer 3D desmontável
 
 Site estático (HTML/CSS/JS puro, sem build). Abra via servidor local, por exemplo:
