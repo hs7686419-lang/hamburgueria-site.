@@ -1,0 +1,1 @@
+Coloque aqui somente imagens do Instagram autorizadas pela empresa e liste-as em config.js → instagram.galeria.

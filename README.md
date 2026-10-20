@@ -49,3 +49,9 @@ Para um lanche novo: adicione-o ao `CARDAPIO` e crie a entrada correspondente em
 ## Pedido
 
 `Pedido.add(id)` é o ponto de integração de todos os botões "Pedir agora". Hoje ele alimenta um carrinho simples e finaliza por WhatsApp: defina `WHATSAPP_NUMERO` (ex.: `'5511999999999'`) em `index.html`. Se já existir outro sistema de pedidos, basta reimplementar `Pedido.add`.
+
+---
+
+## Outro projeto neste repositório
+
+A pasta [`oliveira-cavanholi/`](oliveira-cavanholi/README.md) contém o site da **Oliveira & Cavanholi — Contabilidade Consultiva**, independente da hamburgueria.
