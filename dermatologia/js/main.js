@@ -5,10 +5,11 @@
   var MSG_PADRAO = 'Olá! Gostaria de agendar uma consulta com a Dra. Helena Ciacci.';
 
   // Seção "Trabalhos": cole aqui os links dos posts do Instagram, na ordem de exibição.
-  // Aceita posts (/p/...) e reels (/reel/...). Lista vazia mostra o convite para o perfil.
+  // Aceita posts (/p/...) e reels (/reel/...). Lista vazia esconde a grade.
   var INSTAGRAM_POSTS = [
     'https://www.instagram.com/reel/DaBLqorJgLE/', // cirurgia de pele
     'https://www.instagram.com/reel/DVzMRfNiUG6/', // "Doutora, precisa tirar?"
+    'https://www.instagram.com/p/DT3waofkmFS/', // retratos corporativos (post do fotógrafo)
     // 'https://www.instagram.com/p/XXXXXXXXXXX/',
   ];
 
@@ -39,8 +40,6 @@
       works.appendChild(li);
     });
     works.hidden = false;
-    var vazio = document.querySelector('[data-works-empty]');
-    if (vazio) vazio.hidden = true;
 
     var carregarEmbed = function () {
       if (window.instgrm) { window.instgrm.Embeds.process(); return; }
