@@ -335,6 +335,49 @@ address { font-style: normal; }
 }
 .feature .link-arrow { margin-top: 4.5rem; margin-left: 1.5rem; color: var(--cream); }
 
+/* trabalhos (embeds do Instagram) */
+.works__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem 3rem; flex-wrap: wrap; }
+.works {
+  list-style: none; padding: 0; margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 326px), 1fr));
+  gap: clamp(1.25rem, 2.4vw, 2.25rem);
+  align-items: start;
+}
+.works[hidden], .works__empty[hidden] { display: none; }
+.works__item { border-top: 1px solid rgba(200,169,135,.55); padding-top: 1.25rem; min-width: 0; }
+.works__item blockquote,
+.works__item iframe {
+  width: 100% !important; min-width: 0 !important; max-width: none !important;
+  margin: 0 !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+}
+.works__item iframe { background: #fff; }
+/* antes do script do Instagram carregar (ou se for bloqueado) */
+.works__item blockquote {
+  display: grid; place-items: center;
+  aspect-ratio: 4 / 5;
+  background: var(--slate-700) !important;
+  border: 1px solid rgba(255,255,255,.08) !important;
+}
+.works__item blockquote a {
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--champagne); text-decoration: none;
+}
+.works__empty {
+  display: flex; align-items: center; gap: 1.5rem 2.5rem; flex-wrap: wrap;
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-top: 1px solid rgba(200,169,135,.55);
+  border-bottom: 1px solid rgba(200,169,135,.55);
+  text-decoration: none;
+  color: var(--text);
+}
+.works__empty .h3 { flex: 1 1 18rem; }
+.works__ig { width: 2.6rem; height: 2.6rem; fill: none; stroke: var(--champagne); stroke-width: 1.2; }
+.works__ig circle:last-child { fill: var(--champagne); stroke: none; }
+.works__empty:hover .link-arrow svg { transform: translateX(4px); }
+
 /* atendimento */
 .places {
   display: grid;
