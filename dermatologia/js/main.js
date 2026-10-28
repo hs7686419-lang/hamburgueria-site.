@@ -7,6 +7,8 @@
   // Seção "Trabalhos": cole aqui os links dos posts do Instagram, na ordem de exibição.
   // Aceita posts (/p/...) e reels (/reel/...). Lista vazia mostra o convite para o perfil.
   var INSTAGRAM_POSTS = [
+    'https://www.instagram.com/reel/DaBLqorJgLE/', // cirurgia de pele
+    'https://www.instagram.com/reel/DVzMRfNiUG6/', // "Doutora, precisa tirar?"
     // 'https://www.instagram.com/p/XXXXXXXXXXX/',
   ];
 
@@ -81,6 +83,29 @@
   } else {
     itens.forEach(function (el) { el.classList.add('is-in'); });
   }
+
+  // Vídeo de apresentação: só baixa e toca (com som) quando a pessoa clica
+  document.querySelectorAll('[data-video]').forEach(function (fig) {
+    var video = fig.querySelector('video');
+    var botao = fig.querySelector('.video__play');
+    if (!video || !botao) return;
+    botao.addEventListener('click', function () {
+      video.controls = true;
+      fig.classList.add('is-playing');
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { fig.classList.remove('is-playing'); });
+    });
+    video.addEventListener('ended', function () {
+      video.controls = false;
+      video.load(); // volta para a capa
+      fig.classList.remove('is-playing');
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting && !video.paused) video.pause();
+      }, { threshold: 0.15 }).observe(fig);
+    }
+  });
 
   // Botão flutuante some enquanto o CTA do hero está visível
   var flutuante = document.querySelector('.wa-float');

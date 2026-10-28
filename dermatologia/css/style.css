@@ -340,7 +340,7 @@ address { font-style: normal; }
 .works {
   list-style: none; padding: 0; margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 326px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: clamp(1.25rem, 2.4vw, 2.25rem);
   align-items: start;
 }
@@ -365,6 +365,44 @@ address { font-style: normal; }
   font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
   color: var(--champagne); text-decoration: none;
 }
+.works__feature {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: start;
+}
+.works__aside .works { margin-top: clamp(2rem, 4vw, 3rem); }
+.works__aside .body { margin-top: 1.1rem; }
+.works__aside .works__empty { margin-top: clamp(2rem, 4vw, 3rem); }
+
+/* player do vídeo de apresentação (vertical 9:16) */
+.video {
+  position: relative;
+  isolation: isolate;
+  max-width: 400px;
+  aspect-ratio: 9 / 16;
+  background: var(--slate-900);
+}
+.video::after {
+  content: ""; position: absolute; inset: 1.1rem -1.1rem -1.1rem 1.1rem;
+  border: 1px solid var(--champagne-line); opacity: .6; z-index: -1;
+  pointer-events: none;
+}
+.video video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--slate-900); }
+.video__play {
+  position: absolute; left: 50%; top: 50%;
+  width: 4.75rem; height: 4.75rem; margin: -2.375rem 0 0 -2.375rem;
+  border: 0; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--champagne); color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 14px 40px -14px rgba(0,0,0,.6);
+  transition: transform .3s var(--ease), background .3s var(--ease);
+}
+.video__play svg { width: 1.6rem; height: 1.6rem; fill: currentColor; margin-left: .2rem; }
+.video__play:hover { transform: scale(1.04); background: #e6cdb4; }
+.video.is-playing .video__play { opacity: 0; pointer-events: none; }
+
 .works__empty {
   display: flex; align-items: center; gap: 1.5rem 2.5rem; flex-wrap: wrap;
   padding: clamp(2rem, 4vw, 3rem) 0;
@@ -493,6 +531,9 @@ address { font-style: normal; }
   .feature .link-arrow { margin-top: 3rem; }
 
   .places { grid-template-columns: 1fr; }
+
+  .works__feature { grid-template-columns: 1fr; }
+  .video { width: calc(100% - 1.1rem); max-width: 340px; }
 }
 
 @media (max-width: 560px) {
