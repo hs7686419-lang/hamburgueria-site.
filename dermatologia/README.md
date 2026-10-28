@@ -9,15 +9,14 @@ cd dermatologia && python3 -m http.server 8000   # http://localhost:8000
 
 | Arquivo | Função |
 |---|---|
-| `index.html` | Hero, Sobre/Formação, Áreas de atuação, destaque Skinbooster, Trabalhos (Instagram), Atendimento (endereços + CTA), footer |
+| `index.html` | Hero, Sobre/Formação, Áreas de atuação, destaque Skinbooster, Trabalhos, Atendimento (endereços + CTA), footer |
 | `css/style.css` | Design system (tokens no `:root`): slate de estúdio, champanhe, taupe editorial; Newsreader + Figtree |
 | `js/main.js` | Links de WhatsApp com mensagem pré-preenchida, reveal sutil, botão flutuante |
-| `assets/` | Fotos recortadas da referência (`dra-helena-hero.webp`, `dra-helena-retrato.webp`), vídeo de apresentação (`dra-helena-apresentacao.mp4` + capa `.webp`), OG image e favicon |
+| `assets/` | Fotos recortadas da referência (`dra-helena-hero.webp`, `dra-helena-retrato.webp`), vídeos (`dra-helena-apresentacao.mp4`, `trabalho-*.mp4`, cada um com capa `.webp`), foto `retrato-consultorio.webp`, OG image e favicon |
 
-- **Trabalhos:** o vídeo de apresentação (17 s, com som) só é baixado quando a pessoa clica em play.
-  Para os reels/posts, cole os links dos posts/reels em `INSTAGRAM_POSTS` (topo de `js/main.js`), na ordem desejada.
-  A página usa o embed oficial do Instagram (script carregado só perto da seção). Com a lista vazia,
-  a seção mostra um convite para o perfil @drahelenaciacci.
+- **Trabalhos:** vídeos e foto ficam hospedados no próprio site (sem o player do Instagram). Cada vídeo usa
+  `<figure class="video video--plain" data-video>` com `poster`; só é baixado ao clicar em play e toca um por vez.
+  Para incluir outro, copie um `<li class="works__item">` em `index.html` e troque os arquivos.
 - WhatsApp: troque `WHATSAPP` / `MSG_PADRAO` em `js/main.js`. Um link com `data-msg` usa mensagem própria.
 - Conteúdo baseado nas informações fornecidas; sem preços, depoimentos, números ou promessas de resultado.
   O texto evita afirmar título de especialista (usa "Médica · CRM-MG 93658").

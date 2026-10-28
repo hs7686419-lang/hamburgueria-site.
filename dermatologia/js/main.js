@@ -4,65 +4,7 @@
   var WHATSAPP = '5535988766016';
   var MSG_PADRAO = 'Olá! Gostaria de agendar uma consulta com a Dra. Helena Ciacci.';
 
-  // Seção "Trabalhos": cole aqui os links dos posts do Instagram, na ordem de exibição.
-  // Aceita posts (/p/...) e reels (/reel/...). Lista vazia esconde a grade.
-  var INSTAGRAM_POSTS = [
-    'https://www.instagram.com/reel/DaBLqorJgLE/', // cirurgia de pele
-    'https://www.instagram.com/reel/DVzMRfNiUG6/', // "Doutora, precisa tirar?"
-    'https://www.instagram.com/p/DT3waofkmFS/', // retratos corporativos (post do fotógrafo)
-    // 'https://www.instagram.com/p/XXXXXXXXXXX/',
-  ];
-
   document.documentElement.classList.add('js');
-
-  // Trabalhos: monta os embeds oficiais e só baixa o script do Instagram perto da seção
-  var works = document.querySelector('[data-works]');
-  var posts = INSTAGRAM_POSTS.map(function (url) {
-    var m = String(url).match(/instagram\.com\/(?:[\w.]+\/)?(p|reel|tv)\/([\w-]+)/);
-    return m && 'https://www.instagram.com/' + m[1] + '/' + m[2] + '/';
-  }).filter(Boolean);
-
-  if (works && posts.length) {
-    posts.forEach(function (url) {
-      var li = document.createElement('li');
-      li.className = 'works__item';
-      var bq = document.createElement('blockquote');
-      bq.className = 'instagram-media';
-      bq.setAttribute('data-instgrm-permalink', url + '?utm_source=ig_embed');
-      bq.setAttribute('data-instgrm-version', '14');
-      var a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = 'Ver publicação no Instagram';
-      bq.appendChild(a);
-      li.appendChild(bq);
-      works.appendChild(li);
-    });
-    works.hidden = false;
-
-    var carregarEmbed = function () {
-      if (window.instgrm) { window.instgrm.Embeds.process(); return; }
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.instagram.com/embed.js';
-      document.body.appendChild(s);
-    };
-    if ('IntersectionObserver' in window) {
-      var obsWorks = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) { obsWorks.disconnect(); carregarEmbed(); }
-      }, { rootMargin: '800px 0px' });
-      obsWorks.observe(works);
-    } else {
-      carregarEmbed();
-    }
-  }
-
-  // Links de WhatsApp com mensagem pré-preenchida (data-msg sobrescreve a padrão)
-  document.querySelectorAll('.js-wa').forEach(function (a) {
-    var msg = a.getAttribute('data-msg') || MSG_PADRAO;
-    a.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
-  });
 
   var ano = document.getElementById('ano');
   if (ano) ano.textContent = new Date().getFullYear();
@@ -89,6 +31,9 @@
     var botao = fig.querySelector('.video__play');
     if (!video || !botao) return;
     botao.addEventListener('click', function () {
+      document.querySelectorAll('[data-video] video').forEach(function (outro) {
+        if (outro !== video && !outro.paused) outro.pause();
+      });
       video.controls = true;
       fig.classList.add('is-playing');
       var p = video.play();

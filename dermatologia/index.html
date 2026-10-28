@@ -166,7 +166,7 @@
       </div>
     </section>
 
-    <!-- TRABALHOS — galeria de posts do Instagram (lista em js/main.js → INSTAGRAM_POSTS) -->
+    <!-- TRABALHOS — vídeo de apresentação + galeria (vídeos e foto hospedados no site) -->
     <section class="section section--deep" id="trabalhos" aria-labelledby="trabalhos-title">
       <div class="container">
         <header class="section__head works__head reveal">
@@ -189,7 +189,7 @@
             <h3 class="h3">Conheça a Dra. Helena</h3>
             <p class="body">Em um vídeo curto, gravado no consultório, ela apresenta suas áreas de atuação — dermatologia clínica e cirúrgica, tricologia e estética — e os atendimentos em Varginha e Campo Belo.</p>
 
-            <a class="works__empty" data-works-empty href="https://www.instagram.com/drahelenaciacci/" target="_blank" rel="noopener">
+            <a class="works__empty" href="https://www.instagram.com/drahelenaciacci/" target="_blank" rel="noopener">
               <svg class="works__ig" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r=".9"/></svg>
               <span class="h3">Procedimentos e bastidores no Instagram</span>
               <span class="link-arrow">Ver perfil <svg viewBox="0 0 28 12" aria-hidden="true"><path d="M0 6h26M21 1l5 5-5 5"/></svg></span>
@@ -197,7 +197,29 @@
           </div>
         </div>
 
-        <ul class="works" data-works hidden></ul>
+        <ul class="works">
+          <li class="works__item reveal">
+            <figure class="video video--plain" data-video>
+              <video src="assets/trabalho-cirurgias.mp4" poster="assets/trabalho-cirurgias.webp" width="720" height="1280" preload="none" playsinline aria-label="Vídeo: a Dra. Helena fala sobre pequenas cirurgias de pele"></video>
+              <button class="video__play" type="button" aria-label="Assistir ao vídeo sobre pequenas cirurgias de pele (45 segundos, com som)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+              </button>
+            </figure>
+          </li>
+          <li class="works__item reveal">
+            <figure class="video video--plain" data-video>
+              <video src="assets/trabalho-precisa-tirar.mp4" poster="assets/trabalho-precisa-tirar.webp" width="720" height="1280" preload="none" playsinline aria-label="Vídeo: “Doutora, precisa tirar?” — quando acompanhar uma alteração na pele"></video>
+              <button class="video__play" type="button" aria-label="Assistir ao vídeo “Doutora, precisa tirar?” (26 segundos, com som)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+              </button>
+            </figure>
+          </li>
+          <li class="works__item reveal">
+            <figure class="video video--plain">
+              <img src="assets/retrato-consultorio.webp" alt="Dra. Helena Ciacci de braços cruzados no consultório" width="900" height="1200" loading="lazy">
+            </figure>
+          </li>
+        </ul>
       </div>
     </section>
 
